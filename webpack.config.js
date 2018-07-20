@@ -1,10 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/doria.js',
+  entry: './src/index.js',
   output: {
       path: path.resolve(__dirname, 'lib'),
-      filename: 'doria.min.js'
+      filename: 'doria.js',
+      library: 'doria',
+      libraryTarget: 'umd'
   },
   module: {
       rules: [
