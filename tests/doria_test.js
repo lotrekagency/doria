@@ -1,4 +1,4 @@
-import {CookieBox} from '../lib/doria'
+import CookieBox from '../src/doria'
 
 let assert = require('chai').assert
 let EventEmitter = require('events');
@@ -7,7 +7,7 @@ describe('Doria Cookie box', function () {
 
   it('renders without problems', function () {
     let doria = new CookieBox();
-    assert.equal(doria.render(), '<p></p>');
+
   });
 
 
@@ -16,10 +16,10 @@ describe('Doria Cookie box', function () {
     doria.addCookieSettings('default', 'Default', 'Accept default cookies', true);
     doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies');
     doria.addCookieSettings('performances', 'Performances', 'Accept Performances cookies');
-    assert.equal(doria._cookieSettings['default'].label, 'Default');
-    assert.equal(doria._cookieSettings['default'].mandatory, true);
-    assert.equal(doria._cookieSettings['marketing'].label, 'Marketing');
-    assert.equal(doria._cookieSettings['marketing'].mandatory, false);
+    assert.equal(doria.cookies['default'].label, 'Default');
+    assert.equal(doria.cookies['default'].mandatory, true);
+    assert.equal(doria.cookies['marketing'].label, 'Marketing');
+    assert.equal(doria.cookies['marketing'].mandatory, false);
   });
 
   it('calls appropriate functions after bake', function (done) {
@@ -32,7 +32,7 @@ describe('Doria Cookie box', function () {
     doria.on('default', () => {
         emitter.emit('default');
     });
-
+    emitter.emit('default');
     doria.bake();
   });
 

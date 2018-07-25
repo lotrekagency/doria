@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "html-loader": "^0.5.5",
     "karma": "^2.0.4",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",

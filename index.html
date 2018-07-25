@@ -1,21 +1,33 @@
 <!doctype html>
 <html class="no-js" lang="">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>A lot of cookies</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>A lot of cookies</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
 
-<body>
-  <h1>We want some cookies!</h1>
-  <script src="./lib/doria.js"></script>
-  <script>
-    var doria = new doria.CookieBox();
-    console.log(doria.render());
-  </script>
-</body>
+  <body>
+    <h1>We want some cookies!</h1>
+
+    <script src="./lib/doria.js"></script>
+    <script>
+      var dd = new doria.CookieBox();
+      dd.addCookieSettings('default', 'Default', 'Accept default cookies', true);
+      dd.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies');
+
+      dd.on('default', function() {
+        console.log('Default cookies!')
+      });
+
+      dd.on('marketing', function() {
+        console.log('Marketing cookies!')
+      })
+
+      dd.bake();
+    </script>
+  </body>
 
 </html>

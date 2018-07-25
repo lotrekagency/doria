@@ -1,0 +1,13 @@
+<div>
+  <div><%=doria.title%></div>
+  <div><%=doria.subtitle%></div>
+  <form id="doria_accept_form" method="POST">
+    <% for (cookie in doria.cookies) { %>
+      <option value="<%=cookie%>"><%=doria.cookies[cookie].label%></option>
+      <input type="checkbox" id="doria_<%=cookie%>" name="<%=cookie%>" value="<%=cookie%>" <% if (doria.cookies[cookie].mandatory) { %> checked disabled <% } %>/>
+      <label for="doria_<%=cookie%>"><%=doria.cookies[cookie].label%></label>
+      <p><%=doria.cookies[cookie].description%></p>
+    <% } %>
+    <input type="submit" value="<%=doria.acceptButtonLabel%>">
+  </form>
+</div>

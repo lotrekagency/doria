@@ -1,3 +1,5 @@
+var webpackConfig = require('./webpack.config.js');
+
 module.exports = function(config) {
     config.set({
         basePath: '.',
@@ -6,12 +8,14 @@ module.exports = function(config) {
 
         preprocessors: {
             // add webpack as preprocessor
+            'src/**/*.js': ['webpack', 'coverage'],
             'tests/*_test.js': [ 'webpack' ],
             'tests/**/*_test.js': [ 'webpack' ]
         },
 
         files: [
             // all files ending in "_test"
+            'src/**/*.js',
             { pattern: 'tests/*_test.js', watched: false },
             { pattern: 'tests/**/*_test.js', watched: false }
             // each file acts as entry point for the webpack configuration
@@ -22,6 +26,8 @@ module.exports = function(config) {
             'karma-sourcemap-loader', 'karma-webpack', 'karma-coverage',
             'karma-mocha-reporter'
         ],
+
+        webpack: webpackConfig,
 
         reporters: ['progress', 'coverage'],
 
@@ -38,7 +44,7 @@ module.exports = function(config) {
             ]
         },
 
-        watch: false,
-        singleRun: true
+        watch: true,
+        singleRun: false
     });
 };

@@ -22,6 +22,11 @@ module.exports = {
               presets: ['@babel/preset-env']
             }
           }
+        },
+        {
+          test: /\.html$/,
+          exclude: /node_modules/,
+          use: {loader: 'html-loader'}
         }
       ]
     }
