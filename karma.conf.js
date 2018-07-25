@@ -1,4 +1,7 @@
-var webpackConfig = require('./webpack.config.js');
+var webpackTestConfig = require('./webpack.test.js');
+
+const path = require('path');
+
 
 module.exports = function(config) {
     config.set({
@@ -8,14 +11,12 @@ module.exports = function(config) {
 
         preprocessors: {
             // add webpack as preprocessor
-            'src/**/*.js': ['webpack', 'coverage'],
             'tests/*_test.js': [ 'webpack' ],
             'tests/**/*_test.js': [ 'webpack' ]
         },
 
         files: [
             // all files ending in "_test"
-            'src/**/*.js',
             { pattern: 'tests/*_test.js', watched: false },
             { pattern: 'tests/**/*_test.js', watched: false }
             // each file acts as entry point for the webpack configuration
@@ -24,14 +25,14 @@ module.exports = function(config) {
         plugins: [
             'karma-chrome-launcher', 'karma-chai', 'karma-mocha',
             'karma-sourcemap-loader', 'karma-webpack', 'karma-coverage',
-            'karma-mocha-reporter'
+            'karma-mocha-reporter', 'karma-coverage-istanbul-reporter'
         ],
 
-        webpack: webpackConfig,
+        webpack: webpackTestConfig,
 
-        reporters: ['progress', 'coverage'],
+        reporters: ['progress', 'coverage-istanbul'],
 
-        coverageReporter: {
+        coverageIstanbulReporter: {
             reporters : [
                 {
                     type : 'html',
@@ -41,7 +42,8 @@ module.exports = function(config) {
                     type: 'json',
                     dir: '.fecoverage/'
                 }
-            ]
+            ],
+            fixWebpackSourcePaths: true
         },
 
         watch: true,

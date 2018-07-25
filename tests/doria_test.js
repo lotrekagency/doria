@@ -7,7 +7,11 @@ describe('Doria Cookie box', function () {
 
   it('renders without problems', function () {
     let doria = new CookieBox();
-
+    let doriaAcceptForm = document.getElementById('doria_accept_form');
+    assert.equal(doriaAcceptForm, undefined);
+    doria.bake();
+    doriaAcceptForm = document.getElementById('doria_accept_form');
+    assert.notEqual(doriaAcceptForm, undefined);
   });
 
 
@@ -26,14 +30,16 @@ describe('Doria Cookie box', function () {
     let doria = new CookieBox();
     doria.addCookieSettings('default', 'Default', 'Accept default cookies', true);
 
-    var emitter = new EventEmitter();
+    let emitter = new EventEmitter();
     emitter.on('default', done);
 
     doria.on('default', () => {
         emitter.emit('default');
     });
-    emitter.emit('default');
+
     doria.bake();
+    document.querySelector('input[type*="submit"]').click();
+
   });
 
 });
