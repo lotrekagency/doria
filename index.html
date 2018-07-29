@@ -15,13 +15,22 @@
     <script src="./lib/doria.js"></script>
     <script>
       var dd = new doria.CookieBox();
-      dd.addCookieSettings('default', 'Default', 'Accept default cookies', true);
-      dd.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies');
-
+      dd.addCookieSettings(
+        'default',
+        'Default',
+        'Accept default cookies',
+        [],
+        true
+      );
+      dd.addCookieSettings(
+        'marketing',
+        'Marketing',
+        'Accept Marketing cookies',
+        []
+      );
       dd.on('default', function() {
         console.log('Default cookies!')
       });
-
       dd.on('marketing', function() {
         console.log('Marketing cookies!')
       })
