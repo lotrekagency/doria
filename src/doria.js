@@ -57,7 +57,8 @@ export default class CookieBox {
                 continue;
             if (cookie.checked === true && this.cookies[cookie.name].handler) {
                 this.cookies[cookie.name].accepted = true;
-                this.cookies[cookie.name].handler();
+                if (this.cookies[cookie.name])
+                    this.cookies[cookie.name].handler();
                 selectedCookies.push(cookie.name);
             }
             if (cookie.checked === false) {
@@ -81,7 +82,8 @@ export default class CookieBox {
         for (let acceptedCookie of config.acceptedCookies) {
             if (acceptedCookie in this.cookies) {
                 this.cookies[acceptedCookie].accepted = true;
-                this.cookies[acceptedCookie].handler();
+                if (this.cookies[acceptedCookie].handler)
+                    this.cookies[acceptedCookie].handler();
             }
         }
     }
