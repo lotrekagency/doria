@@ -74,6 +74,8 @@ describe('Doria Cookie box', function () {
     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
     doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
 
+    doria.on('default', () => {});
+
     doria.bake();
     let checkboxes = document.querySelectorAll("input[type='checkbox']");
     for(let i = 0; i < checkboxes.length; i++) {
