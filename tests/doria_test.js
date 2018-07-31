@@ -1,4 +1,4 @@
-import CookieBox from '../src/doria'
+import {CookieBox, loadScript} from '../src/index'
 
 let assert = require('chai').assert
 let EventEmitter = require('events');
@@ -81,6 +81,57 @@ describe('Doria Cookie box', function () {
     for(let i = 0; i < checkboxes.length; i++) {
         assert.equal(checkboxes[i].checked, true);
     }
+
+  });
+
+  it('deletes cookies on unchecking option and accept', function (done) {
+    let config = {
+        isAccepted: this.isAccepted,
+        acceptedCookies: ['default', 'marketing']
+    }
+    localStorage.setItem('doria__settings', JSON.stringify(config));
+
+    let simulateDeletion = () => {
+
+        setTimeout(() => {
+            assert.include(document.cookie, '_ga');
+            assert.include(document.cookie, '_gat');
+            assert.include(document.cookie, '_gid');
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            for(let i = 0; i < checkboxes.length; i++) {
+                assert.equal(checkboxes[i].checked, true);
+                checkboxes[i].click();
+            }
+            document.querySelector('input[type*="submit"]').click();
+            assert.notInclude(document.cookie, '_ga');
+            assert.notInclude(document.cookie, '_gat');
+            assert.notInclude(document.cookie, '_gid');
+            done();
+        }, 200)
+    }
+
+    let doria = new CookieBox();
+    doria.addCookieSettings(
+      'default',
+      'Default',
+      'Accept default cookies',
+      [],
+      true
+    );
+    doria.addCookieSettings(
+      'marketing',
+      'Marketing',
+      'Accept Marketing cookies',
+      ['_ga', '_gat', '_gid']
+    );
+    doria.on('marketing', function() {
+      window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+      ga('create', 'UA-XXXX-Y', {"cookieDomain":"none"}); ga('send', 'pageview');
+      loadScript("https://www.google-analytics.com/analytics.js");
+      simulateDeletion();
+    });
+
+    doria.bake();
 
   });
 

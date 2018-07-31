@@ -47,7 +47,7 @@ export default class CookieBox {
     }
 
     _deleteCookie(name) {
-    //     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
     _onAccept(event) {
