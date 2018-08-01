@@ -2,6 +2,7 @@ import {render} from './template';
 import doria_banner_tpl from './templates/doria_banner_tpl.html';
 import doria_settings_tpl from './templates/doria_settings_tpl.html';
 
+import './styles/base.scss';
 
 function deleteCookie(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
