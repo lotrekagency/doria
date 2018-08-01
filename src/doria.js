@@ -62,12 +62,13 @@ function onAccept(event) {
 
 export default class CookieBox {
 
-    constructor() {
-        this.title = 'Cookie settings';
-        this.subtitle = 'Select the cookies you want to accept'
-        this.acceptButtonLabel = 'Accept';
-        this.settingsButtonLabel = 'Settings';
-        this.closeButtonLabel = 'Close';
+    constructor(options={}) {
+        this.options = options;
+        // this.title = 'Cookie settings';
+        // this.subtitle = 'Select the cookies you want to accept'
+        // this.acceptButtonLabel = 'Accept';
+        // this.settingsButtonLabel = 'Settings';
+        // this.closeButtonLabel = 'Close';
         this.cookies = {};
     }
 

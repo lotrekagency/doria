@@ -1,7 +1,5 @@
 var webpackTestConfig = require('./webpack.test.js');
 
-const path = require('path');
-
 
 module.exports = function(config) {
     config.set({
