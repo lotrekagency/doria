@@ -26,7 +26,15 @@ module.exports = {
         {
           test: /\.html$/,
           exclude: /node_modules/,
-          use: {loader: 'html-loader'}
+          use: {
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+              removeComments: true,
+              collapseWhitespace: true,
+              collapseInlineTagWhitespace: true,
+            }
+          }
         }
       ]
     }

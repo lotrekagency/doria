@@ -39,7 +39,7 @@ export default class CookieBox {
             event.preventDefault();
             this._onAccept(event);
             return false;
-        }
+        };
     }
 
     on(key, f) {
@@ -52,18 +52,20 @@ export default class CookieBox {
 
     _onAccept(event) {
         let selectedCookies = [];
+        let cookie_name = '';
         for (let cookie of event.target) {
-            if (!(cookie.name in this.cookies))
+            cookie_name = cookie.name;
+            if (!(cookie_name in this.cookies))
                 continue;
-            if (cookie.checked === true && this.cookies[cookie.name].handler) {
-                this.cookies[cookie.name].accepted = true;
-                if (this.cookies[cookie.name])
-                    this.cookies[cookie.name].handler();
-                selectedCookies.push(cookie.name);
+            if (cookie.checked === true && this.cookies[cookie_name].handler) {
+                this.cookies[cookie_name].accepted = true;
+                if (this.cookies[cookie_name])
+                    this.cookies[cookie_name].handler();
+                selectedCookies.push(cookie_name);
             }
             if (cookie.checked === false) {
-                this.cookies[cookie.name].accepted = false;
-                for (let cookieTarget of this.cookies[cookie.name].cookies) {
+                this.cookies[cookie_name].accepted = false;
+                for (let cookieTarget of this.cookies[cookie_name].cookies) {
                     this._deleteCookie(cookieTarget);
                 }
             }

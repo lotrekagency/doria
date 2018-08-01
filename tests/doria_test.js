@@ -107,7 +107,7 @@ describe('Doria Cookie box', function () {
             assert.notInclude(document.cookie, '_gat');
             assert.notInclude(document.cookie, '_gid');
             done();
-        }, 200)
+        }, 1000)
     }
 
     let doria = new CookieBox();
@@ -127,8 +127,10 @@ describe('Doria Cookie box', function () {
     doria.on('marketing', function() {
       window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
       ga('create', 'UA-XXXX-Y', {"cookieDomain":"none"}); ga('send', 'pageview');
-      loadScript("https://www.google-analytics.com/analytics.js");
-      simulateDeletion();
+      loadScript("https://www.google-analytics.com/analytics.js").then(
+        () => simulateDeletion()
+      );
+
     });
 
     doria.bake();
