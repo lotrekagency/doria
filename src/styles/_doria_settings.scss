@@ -63,6 +63,11 @@
 }
 
 .checkbox {
+
+  &__wrapper{
+    margin: 0 0.5rem;
+  }
+
   &__container {
     display: flex;
     flex: 1;
@@ -74,12 +79,63 @@
     margin: 0.2rem 0;
   }
 
-  &__input {
-    margin-right: 0.5rem;
-  }
-
   &__label {
     font-weight: bold;
+  }
+
+  &__input {
+    position: relative;
+  }
+
+  &--custom{
+    position: absolute;
+    height: 1px;
+    width: 1px;
+
+    &:checked ~ .checkbox__value{
+      background-color: $validBackgroundColorCheckbox;
+
+      &:after{
+        left: calc(90% - 20px);
+      }
+      &:before{
+        content: 'Si';
+        right: 0;
+        left: 10px;
+      }
+    }
+  }
+
+  &__value{
+    display: inline-block;
+    padding: 0.9rem 0.6rem;
+    min-width: 3rem;
+    position: relative;
+    background-color: $errorBackgroundColorCheckbox;
+    border-radius: 1.8rem;
+    transition: background-color 0.18s ease-in;
+
+    &:after{
+      content: " ";
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      left: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      position: absolute;
+      border-radius: 100%;
+      transition: left 0.15s;
+    }
+
+    &:before{
+      position: absolute;
+      content: 'No';
+      color: white;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 }
 
