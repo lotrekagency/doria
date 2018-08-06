@@ -1,5 +1,5 @@
 .doriabanner {
-  background-color: rgba(black, 0.7);
+  background-color: $backgroundBanner;
   color: white;
   font-size: 1em;
   padding: 1.5rem 0;
@@ -33,6 +33,7 @@
   }
   &--hidden {
     animation-name: invisible;
+    opacity: 0;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
   }
