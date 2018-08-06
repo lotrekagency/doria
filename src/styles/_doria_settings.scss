@@ -6,7 +6,8 @@
   position: relative;
   top: 30%;
   border-radius: 4px;
-
+  z-index: 120;
+  
   @media(min-width: 992px) {
     width: 400px;
     margin: 0 auto;
@@ -29,6 +30,7 @@
     height: 100%;
     width: 100%;
     background-color: $backgroundSettingsWrapper;
+    z-index: 110;
   }
   &__button {
     width: 100%;
