@@ -39,7 +39,7 @@
   &--hidden {
     animation-name: invisible;
     opacity: 0;
-    animation-duration: 1s;
+    animation-duration: 0s;
     animation-timing-function: ease-in-out;
   }
 }
