@@ -7,7 +7,7 @@
   top: 30%;
   border-radius: 4px;
   z-index: 120;
-  
+
   @media(min-width: 992px) {
     width: 400px;
     margin: 0 auto;
@@ -51,6 +51,14 @@
       box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     }
   }
+
+  &--hidden {
+    animation-name: invisible;
+    opacity: 0;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+
 }
 
 .checkbox {
@@ -73,3 +81,12 @@
     font-weight: bold;
   }
 }
+
+@keyframes invisible {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
