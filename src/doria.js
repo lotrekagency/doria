@@ -25,7 +25,6 @@ function saveConfig() {
 function restoreConfig() {
     let config = localStorage.getItem('doria__settings');
     if (!config) {
-        saveConfig.bind(this)();
         return;
     }
     config = JSON.parse(config);
@@ -37,6 +36,14 @@ function restoreConfig() {
                 this.cookies[acceptedCookie].handler();
         }
     }
+}
+
+function hide(elementClass) {
+    document.getElementsByClassName(elementClass)[0].classList.add(elementClass + '--hidden')
+}
+
+function show(elementClass) {
+    document.getElementsByClassName(elementClass)[0].classList.remove(elementClass + '--hidden')
 }
 
 function onAccept(event) {
@@ -61,6 +68,7 @@ function onAccept(event) {
     }
     this.isAccepted = true;
     saveConfig.bind(this)();
+    this.hideSettings();
 }
 
 export default class CookieBox {
@@ -79,7 +87,7 @@ export default class CookieBox {
         this.cookies[key] = {
             label, description, cookies, mandatory
         };
-        this.cookies[key].accepted = true;
+        this.cookies[key].accepted = false;
     }
 
     bake() {
@@ -96,6 +104,22 @@ export default class CookieBox {
             onAccept.bind(this)(event);
             return false;
         };
+    }
+
+    hideBanner() {
+        hide('doriabanner');
+    }
+
+    hideSettings() {
+        hide('doriasettings__wrapper');
+    }
+
+    showBanner() {
+        show('doriabanner');
+    }
+
+    showSettings() {
+        show('doriasettings__wrapper');
     }
 
     on(key, f) {

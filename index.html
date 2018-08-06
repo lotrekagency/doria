@@ -16,28 +16,20 @@
     <script src="./lib/doria.js"></script>
     <script>
       var dd = new doria.CookieBox({
-        bannerDescription:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        title:'Informativa breve Cookie',
+        subtitle:
+        "Questo sito utilizza cookie tecnici di prima parte e cookie analitici di terze parti per offrire agli utenti una migliore esperienza di navigazione e per raccogliere informazioni sull’utilizzo del sito stesso. Questo sito non utilizza cookie di profilazione. <br> <br>Per maggiori dettagli, consulti la nostra <a href='/privacy' target='_blank'>Informativa  Privacy</a> e <a href='/cookies' target='_blank'>Cookie Policy</a> alla pagina dedicata:",
+        beforeAccept: "Cliccando su Accetto acconsenti all'utilizzo di cookie tecnici di prima parte",
+        acceptButtonLabel: "Accetto",
         settingsButtonLabel: "Impostazioni",
         closeButtonLabel: "Chiudi"
-
       });
-      dd.addCookieSettings(
-        'default',
-        'Default',
-        'Accept default cookies',
-        [],
-        true
-      );
       dd.addCookieSettings(
         'marketing',
         'Marketing',
-        'Accept Marketing cookies',
+        'Accetto l\'utilizzo di cookie analitici di terza parte',
         ['_ga', '_gat', '_gid']
       );
-      dd.on('default', function() {
-        console.log('Default cookies!');
-      });
       dd.on('marketing', function() {
         console.log('Marketing cookies!');
         window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
@@ -48,6 +40,8 @@
       })
 
       dd.bake();
+      dd.hideBanner();
+      dd.showSettings();
     </script>
   </body>
 
