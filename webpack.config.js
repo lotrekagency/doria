@@ -10,7 +10,6 @@ module.exports = {
       library: 'doria',
       libraryTarget: 'umd'
   },
-  watch: true,
   module: {
       rules: [
         {

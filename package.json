@@ -21,10 +21,9 @@
     "mocha": "^5.2.0",
     "node-sass": "^4.9.2",
     "sass-loader": "^7.0.3",
-    "webpack": "^4.16.1",
-    "webpack-cli": "^3.0.8"
+    "webpack": "^4.16.1"
   },
   "scripts": {
-    "example" : "webpack  --config webpack.config.js --watch"
+    "example": "webpack  --config webpack.config.js --watch"
   }
 }
