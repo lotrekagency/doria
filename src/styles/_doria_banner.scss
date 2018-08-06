@@ -1,3 +1,48 @@
 .doriabanner {
-    color: red;
+  background-color: rgba(black, 0.7);
+  color: white;
+  font-size: 1em;
+  padding: 1.5rem 0;
+  &__description {
+    padding: 0px 5%;
+  }
+  &__buttons {
+    padding: 0.5rem 5%;
+    @media(min-width: 992px) {
+      text-align: right;
+    }
+  }
+  &__button {
+    width: 100%;
+    background-color: $backgroundColorButton;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-size: 0.9em;
+    margin: 0.2rem 0;
+    transition: box-shadow .3s;
+    @media(min-width: 992px) {
+      width: auto;
+      margin: auto;
+    }
+    &:hover {
+      background-color: $hoverColorButton;
+      box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    }
+  }
+  &--hidden {
+    animation-name: invisible;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+@keyframes invisible {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
