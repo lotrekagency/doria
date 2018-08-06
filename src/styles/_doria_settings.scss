@@ -31,7 +31,15 @@
     width: 100%;
     background-color: $backgroundSettingsWrapper;
     z-index: 110;
+
+    &--hidden {
+        animation-name: invisible;
+        opacity: 0;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+      }
   }
+
   &__button {
     width: 100%;
     background-color: $backgroundColorButton;
@@ -50,13 +58,6 @@
       background-color: $hoverColorButton;
       box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     }
-  }
-
-  &--hidden {
-    animation-name: invisible;
-    opacity: 0;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
   }
 
 }
