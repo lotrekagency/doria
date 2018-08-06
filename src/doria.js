@@ -4,24 +4,9 @@ import doria_settings_tpl from './templates/doria_settings_tpl.html';
 
 import './styles/base.scss';
 
+
 function deleteCookie(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
-
-function restoreConfig() {
-    let config = localStorage.getItem('doria__settings');
-    if (!config) {
-        return;
-    }
-    config = JSON.parse(config);
-    this.isAccepted = config.isAccepted;
-    for (let acceptedCookie of config.acceptedCookies) {
-        if (acceptedCookie in this.cookies) {
-            this.cookies[acceptedCookie].accepted = true;
-            if (this.cookies[acceptedCookie].handler)
-                this.cookies[acceptedCookie].handler();
-        }
-    }
 }
 
 function saveConfig() {
@@ -35,6 +20,23 @@ function saveConfig() {
         }
     }
     localStorage.setItem('doria__settings', JSON.stringify(config));
+}
+
+function restoreConfig() {
+    let config = localStorage.getItem('doria__settings');
+    if (!config) {
+        saveConfig.bind(this)();
+        return;
+    }
+    config = JSON.parse(config);
+    this.isAccepted = config.isAccepted;
+    for (let acceptedCookie of config.acceptedCookies) {
+        if (acceptedCookie in this.cookies) {
+            this.cookies[acceptedCookie].accepted = true;
+            if (this.cookies[acceptedCookie].handler)
+                this.cookies[acceptedCookie].handler();
+        }
+    }
 }
 
 function onAccept(event) {
@@ -77,7 +79,7 @@ export default class CookieBox {
         this.cookies[key] = {
             label, description, cookies, mandatory
         };
-        this.cookies[key].accepted = false;
+        this.cookies[key].accepted = true;
     }
 
     bake() {
