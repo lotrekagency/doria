@@ -33,11 +33,12 @@
     z-index: 110;
 
     &--hidden {
-        animation-name: invisible;
-        opacity: 0;
-        animation-duration: 0s;
-        animation-timing-function: ease-in-out;
-      }
+      pointer-events: none;
+      animation-name: invisible;
+      opacity: 0;
+      animation-duration: 0s;
+      animation-timing-function: ease-in-out;
+    }
   }
 
   &__button {
