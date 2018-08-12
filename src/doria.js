@@ -90,20 +90,32 @@ export default class CookieBox {
 
     bake() {
         restoreConfig.bind(this)();
-        render('doria_banner', 'doria_banner_content', doria_banner_tpl, {
-            doria: this
-        });
+        if (!this.isAccepted) {
+            render('doria_banner', 'doria_banner_content', doria_banner_tpl, {
+                doria: this
+            });
+            this.showBanner();
+        }
         render('doria_settings', 'doria_settings_content', doria_settings_tpl, {
             doria: this
         });
         let doriaAcceptForm = document.getElementById('doria_accept_form');
-        doriaAcceptForm.onsubmit = (event) => {
-            event.preventDefault();
-            onAccept.bind(this)(event);
-            return false;
-        };
-        this.showBanner();
-        this.showSettings();
+        if (doriaAcceptForm) {
+            doriaAcceptForm.onsubmit = (event) => {
+                event.preventDefault();
+                onAccept.bind(this)(event);
+                this.hideBanner();
+                return false;
+            };
+        }
+        let doriaSettingsBtn = document.getElementById('doria_settings');
+        if (doriaSettingsBtn) {
+            doriaSettingsBtn.onclick = (event) => {
+                event.preventDefault();
+                this.showSettings();
+            };
+        }
+        
     }
 
     hideBanner() {
