@@ -90,10 +90,10 @@ export default class CookieBox {
 
     bake() {
         restoreConfig.bind(this)();
-        render('doria_settings', 'doria_settings_content', doria_settings_tpl, {
+        render('doria_banner', 'doria_banner_content', doria_banner_tpl, {
             doria: this
         });
-        render('doria_banner', 'doria_banner_content', doria_banner_tpl, {
+        render('doria_settings', 'doria_settings_content', doria_settings_tpl, {
             doria: this
         });
         let doriaAcceptForm = document.getElementById('doria_accept_form');

@@ -6,6 +6,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
+  width: 100%;
   z-index: 110;
   &__description {
     padding: 0px 5%;
@@ -37,6 +38,7 @@
     }
   }
   &--hidden {
+    pointer-events: none;
     animation-name: invisible;
     opacity: 0;
     animation-duration: 0s;
