@@ -29,7 +29,19 @@ module.exports = {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
+              "presets": [
+                ["@babel/preset-env", {
+                  "useBuiltIns": "usage",
+                  "debug": true,
+                  "targets": {
+                    "browsers": [
+                      "> 3%",
+                      "safari >= 10",
+                      "ie > 11"
+                    ]
+                  }
+                }]
+              ]
             }
           }
         },

@@ -13,10 +13,10 @@ function saveConfig() {
     let config = {
         isAccepted: this.isAccepted,
         acceptedCookies: []
-    }
-    for (const [key, value] of Object.entries(this.cookies)) {
-        if (value.accepted) {
-            config.acceptedCookies.push(key);
+    };
+    for (let cookieName in this.cookies) {
+        if (this.cookies[cookieName].accepted) {
+            config.acceptedCookies.push(cookieName);
         }
     }
     localStorage.setItem('doria__settings', JSON.stringify(config));
@@ -32,8 +32,9 @@ function restoreConfig() {
     for (let acceptedCookie of config.acceptedCookies) {
         if (acceptedCookie in this.cookies) {
             this.cookies[acceptedCookie].accepted = true;
-            if (this.cookies[acceptedCookie].handler)
+            if (this.cookies[acceptedCookie].handler) {
                 this.cookies[acceptedCookie].handler();
+            }
         }
     }
 }
@@ -51,18 +52,20 @@ function onAccept(event) {
     let cookie_name = '';
     for (let cookie of event.target) {
         cookie_name = cookie.name;
-        if (!(cookie_name in this.cookies))
-            continue;
-        if (cookie.checked === true && this.cookies[cookie_name].handler) {
-            this.cookies[cookie_name].accepted = true;
-            if (this.cookies[cookie_name])
-                this.cookies[cookie_name].handler();
-            selectedCookies.push(cookie_name);
-        }
-        if (cookie.checked === false) {
-            this.cookies[cookie_name].accepted = false;
-            for (let cookieTarget of this.cookies[cookie_name].cookies) {
-                deleteCookie.bind(this)(cookieTarget);
+        if (cookie_name in this.cookies) {
+            if (cookie.checked === true && this.cookies[cookie_name].handler) {
+                this.cookies[cookie_name].accepted = true;
+                if (this.cookies[cookie_name]) {
+                    this.cookies[cookie_name].handler();
+                }
+                selectedCookies.push(cookie_name);
+            }
+            if (cookie.checked === false) {
+                this.cookies[cookie_name].accepted = false;
+
+                for (let cookieTarget of this.cookies[cookie_name].cookies) {
+                    deleteCookie.bind(this)(cookieTarget);
+                }
             }
         }
     }
@@ -75,11 +78,6 @@ export default class CookieBox {
 
     constructor(options={}) {
         this.options = options;
-        // this.title = 'Cookie settings';
-        // this.subtitle = 'Select the cookies you want to accept'
-        // this.acceptButtonLabel = 'Accept';
-        // this.settingsButtonLabel = 'Settings';
-        // this.closeButtonLabel = 'Close';
         this.cookies = {};
     }
 
@@ -87,7 +85,7 @@ export default class CookieBox {
         this.cookies[key] = {
             label, description, cookies, mandatory
         };
-        this.cookies[key].accepted = false;
+        this.cookies[key].accepted = true;
     }
 
     bake() {
@@ -104,6 +102,8 @@ export default class CookieBox {
             onAccept.bind(this)(event);
             return false;
         };
+        this.showBanner();
+        this.showSettings();
     }
 
     hideBanner() {
