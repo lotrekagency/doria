@@ -9,7 +9,6 @@ beforeEach(function() {
 
 describe('Doria Cookie box', function () {
 
-
   it('renders without problems', function () {
     let doria = prepare();
     let doriaAcceptForm = document.getElementById('doria_accept_form');
