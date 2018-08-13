@@ -27,6 +27,9 @@
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "example": "webpack  --config webpack.config.js --watch"
+    "dev": "webpack --config webpack.config.js --watch",
+    "build": "webpack -p",
+    "test": "./node_modules/karma/bin/karma start --single-run",
+    "devtest": "./node_modules/karma/bin/karma start"
   }
 }
