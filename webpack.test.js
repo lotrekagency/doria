@@ -4,6 +4,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.scss$/,
+                use: 'null-loader'
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules|test/,
                 include: [

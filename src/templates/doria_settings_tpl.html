@@ -1,13 +1,25 @@
-<div class="doriasettings">
-  <div class="doriasettings__title"><%=doria.options.title%></div>
-  <div class="doriasettings__subtitle"><%=doria.options.subtitle%></div>
-  <form class="doriasettings__form" id="doria_accept_form" method="POST">
-    <% for (var cookie in doria.cookies) { %>
-      <option value="<%=cookie%>"><%=doria.cookies[cookie].label%></option>
-      <input type="checkbox" id="doria_<%=cookie%>" name="<%=cookie%>" value="<%=cookie%>" <% if (doria.cookies[cookie].accepted) { %> checked  <% } %> <% if (doria.cookies[cookie].mandatory) { %> checked disabled <% } %>/>
-      <label for="doria_<%=cookie%>"><%=doria.cookies[cookie].label%></label>
-      <p><%=doria.cookies[cookie].description%></p>
-    <% } %>
-    <input class="doriasettings__submitbtn" type="submit" value="<%=doria.options.acceptButtonLabel%>">
-  </form>
+<div class="doriasettings__wrapper doriasettings__wrapper--hidden">
+  <div class="doriasettings">
+      <div class="doriasettings__title"><%=doria.options.title%></div>
+      <div class="doriasettings__subtitle"><%=doria.options.subtitle%></div>
+      <form class="doriasettings__form" id="doria_accept_form" method="POST">
+        <% for (var cookie in doria.cookies) { %>
+          <div class="checkbox__container">
+            <div class="checkbox__wrapper">
+              <label for="doria_<%=cookie%>" class="checkbox__input">
+                  <input class="checkbox--custom" type="checkbox" id="doria_<%=cookie%>" name="<%=cookie%>" value="<%=cookie%>" <% if (doria.cookies[cookie].accepted) { %> checked  <% } %> <% if (doria.cookies[cookie].mandatory) { %> checked disabled <% } %>/>
+                  <span class="checkbox__value"></span>
+              </label>
+            </div>
+            <div class="checkbox__content">
+              <label class="checkbox__label" for="doria_<%=cookie%>"><%=doria.cookies[cookie].label%></label>
+              <p class="checkbox__description"><%=doria.cookies[cookie].description%></p>
+            </div>
+          </div>
+        <% } %>
+        <div class="doriasettings__beforeaccept"><%=doria.options.beforeAccept%></div>
+
+        <input class="doriasettings__button doriasettings__submitbtn" type="submit" value="<%=doria.options.acceptButtonLabel%>">
+      </form>
+    </div>
 </div>
