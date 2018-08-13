@@ -11,4 +11,9 @@ let loadScript = (src) => {
     })
 }
 
-export { CookieBox, loadScript };
+let prepare = (options) => {
+    CookieBox.setOptions(options);
+    return CookieBox;
+}
+
+export { prepare, loadScript };

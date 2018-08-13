@@ -1,4 +1,4 @@
-import {CookieBox, loadScript} from '../src/index'
+import {prepare, loadScript} from '../src/index'
 
 let assert = require('chai').assert
 let EventEmitter = require('events');
@@ -11,7 +11,7 @@ describe('Doria Cookie box', function () {
 
 
   it('renders without problems', function () {
-    let doria = new CookieBox();
+    let doria = prepare();
     let doriaAcceptForm = document.getElementById('doria_accept_form');
     assert.equal(doriaAcceptForm, undefined);
     doria.bake();
@@ -21,7 +21,7 @@ describe('Doria Cookie box', function () {
 
 
   it('stores cookie settings', function () {
-    let doria = new CookieBox();
+    let doria = prepare();
     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
     doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
     doria.addCookieSettings('performances', 'Performances', 'Accept Performances cookies', []);
@@ -32,7 +32,7 @@ describe('Doria Cookie box', function () {
   });
 
   it('calls appropriate functions after bake', function (done) {
-    let doria = new CookieBox();
+    let doria = prepare();
     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
 
     let emitter = new EventEmitter();
@@ -48,7 +48,7 @@ describe('Doria Cookie box', function () {
   });
 
   it('storages settings', function (done) {
-    let doria = new CookieBox();
+    let doria = prepare();
     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
 
     let settings = JSON.parse(localStorage.getItem('doria__settings'));
@@ -70,7 +70,7 @@ describe('Doria Cookie box', function () {
         acceptedCookies: ['default', 'marketing']
     }
     localStorage.setItem('doria__settings', JSON.stringify(config));
-    let doria = new CookieBox();
+    let doria = prepare();
     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
     doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
 
@@ -110,7 +110,7 @@ describe('Doria Cookie box', function () {
         }, 1000)
     }
 
-    let doria = new CookieBox();
+    let doria = prepare();
     doria.addCookieSettings(
       'default',
       'Default',

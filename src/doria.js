@@ -74,10 +74,9 @@ function onAccept(event) {
     this.hideSettings();
 }
 
-export default class CookieBox {
+class CookieBox {
 
-    constructor(options={}) {
-        this.options = options;
+    constructor() {
         this.cookies = {};
     }
 
@@ -126,6 +125,10 @@ export default class CookieBox {
         hide('doriasettings__wrapper');
     }
 
+    setOptions(options={}) {
+        this.options = options;
+    }
+
     showBanner() {
         show('doriabanner');
     }
@@ -139,3 +142,5 @@ export default class CookieBox {
     }
 
 }
+
+export default new CookieBox();
