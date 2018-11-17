@@ -46,6 +46,22 @@ describe('Doria Cookie box', function () {
 
   });
 
+  it('calls onAccept after click accept button', function (done) {
+    let doria = prepare();
+    doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
+
+    let emitter = new EventEmitter();
+    emitter.on('accepted', done);
+
+    doria.onAccept(() => {
+        emitter.emit('accepted');
+    });
+
+    doria.bake();
+    document.querySelector('input[type*="submit"]').click();
+
+  });
+
   it('storages settings', function (done) {
     let doria = prepare();
     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
@@ -63,7 +79,7 @@ describe('Doria Cookie box', function () {
     });
   });
 
-  it('starts with stored settings', function () {
+  it('starts with mandatory settings', function () {
     let config = {
         isAccepted: this.isAccepted,
         acceptedCookies: ['default', 'marketing']
@@ -106,7 +122,7 @@ describe('Doria Cookie box', function () {
             assert.notInclude(document.cookie, '_gat');
             assert.notInclude(document.cookie, '_gid');
             done();
-        }, 1000)
+        }, 100)
     }
 
     let doria = prepare();
@@ -133,6 +149,7 @@ describe('Doria Cookie box', function () {
     });
 
     doria.bake();
+    document.querySelector('input[type*="submit"]').click();
 
   });
 

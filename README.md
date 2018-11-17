@@ -5,8 +5,8 @@
 ## Build
 ```sh
     git clone https://github.com/lotrekagency/doria
-    npm i
-    npm run build
+    yarn install
+    yarn build
 ```
 And you have in `lib` folder, compiled Doria Lib
 ## Usage
@@ -22,4 +22,11 @@ And you have in `lib` folder, compiled Doria Lib
     })
     doria.bake()
 ```
+
+## Development
+
+To run test suite
+
+    yarn test
+
 See demo on [index.html](https://github.com/lotrekagency/doria/blob/master/index.html)

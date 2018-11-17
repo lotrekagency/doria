@@ -72,12 +72,19 @@ function onAccept(event) {
     this.isAccepted = true;
     saveConfig.bind(this)();
     this.hideSettings();
+    if (this.onAcceptFunction) {
+        this.onAcceptFunction();
+    }
 }
 
 class CookieBox {
 
     constructor() {
         this.cookies = {};
+    }
+
+    acceptOnNavigation() {
+        saveConfig.bind(this)();
     }
 
     addCookieSettings(key, label, description, cookies, mandatory=false) {
@@ -114,7 +121,7 @@ class CookieBox {
                 this.showSettings();
             };
         }
-        
+
     }
 
     hideBanner() {
@@ -123,6 +130,14 @@ class CookieBox {
 
     hideSettings() {
         hide('doriasettings__wrapper');
+    }
+
+    on(key, f) {
+        this.cookies[key].handler = f;
+    }
+
+    onAccept(onAcceptFunction) {
+        this.onAcceptFunction = onAcceptFunction;
     }
 
     setOptions(options={}) {
@@ -135,10 +150,6 @@ class CookieBox {
 
     showSettings() {
         show('doriasettings__wrapper');
-    }
-
-    on(key, f) {
-        this.cookies[key].handler = f;
     }
 
 }

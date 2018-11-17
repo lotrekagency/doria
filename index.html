@@ -38,7 +38,10 @@
         doria.loadScript("https://www.google-analytics.com/analytics.js").then(function () {
           console.log('the script is loaded!')
         })
-      })
+      });
+      dd.onAccept(function() {
+        console.log('Yeah! 🍪');
+      });
       dd.bake();
     </script>
   </body>
