@@ -23,12 +23,13 @@
         beforeAccept: "Cliccando su Accetto acconsenti all'utilizzo di cookie tecnici di prima parte",
         acceptButtonLabel: "Accetto",
         settingsButtonLabel: "Impostazioni",
-        closeButtonLabel: "Chiudi"
+        closeButtonLabel: "Chiudi",
+        onlySettings: true
       });
       dd.addCookieSettings(
         'marketing',
         'Marketing',
-        'Accetto l\'utilizzo di cookie analitici di terza parte',
+        'Accetto l\'utilizzo di cookie analitici di terze parti',
         ['_ga', '_gat', '_gid']
       );
       dd.on('marketing', function() {

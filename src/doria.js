@@ -96,7 +96,7 @@ class CookieBox {
 
     bake() {
         restoreConfig.bind(this)();
-        if (!this.isAccepted) {
+        if (!this.isAccepted && !this.options.onlySettings) {
             render('doria_banner', 'doria_banner_content', doria_banner_tpl, {
                 doria: this
             });
@@ -121,10 +121,16 @@ class CookieBox {
                 this.showSettings();
             };
         }
+        if (!this.isAccepted && this.options.onlySettings) {
+            this.showSettings();
+        }
 
     }
 
     hideBanner() {
+        if (this.options.onlySettings) {
+            return;
+        }
         hide('doriabanner');
     }
 
@@ -145,6 +151,9 @@ class CookieBox {
     }
 
     showBanner() {
+        if (this.options.onlySettings) {
+            return;
+        }
         show('doriabanner');
     }
 
