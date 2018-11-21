@@ -14,7 +14,9 @@ function saveConfig() {
         isAccepted: this.isAccepted,
         acceptedCookies: []
     };
-    for (let cookieName in this.cookies) {
+    let cookieName = undefined;
+    for (let i = 0 ;  i < this.cookies.length ; i++) {
+        cookieName = this.cookies[i];
         if (this.cookies[cookieName].accepted) {
             config.acceptedCookies.push(cookieName);
         }
@@ -29,7 +31,9 @@ function restoreConfig() {
     }
     config = JSON.parse(config);
     this.isAccepted = config.isAccepted;
-    for (let acceptedCookie of config.acceptedCookies) {
+    let acceptedCookie = undefined;
+    for (let i = 0 ; i < config.acceptedCookies.length ; i++) {
+        acceptedCookie = config.acceptedCookies[i];
         if (acceptedCookie in this.cookies) {
             this.cookies[acceptedCookie].accepted = true;
             if (this.cookies[acceptedCookie].handler) {
@@ -50,7 +54,9 @@ function show(elementClass) {
 function onAccept(event) {
     let selectedCookies = [];
     let cookie_name = '';
-    for (let cookie of event.target) {
+    let cookie = undefined;
+    for (let i = 0 ; i < event.target.length ; i++) {
+        cookie = event.target[i];
         cookie_name = cookie.name;
         if (cookie_name in this.cookies) {
             if (cookie.checked === true && this.cookies[cookie_name].handler) {
@@ -63,8 +69,8 @@ function onAccept(event) {
             if (cookie.checked === false) {
                 this.cookies[cookie_name].accepted = false;
 
-                for (let cookieTarget of this.cookies[cookie_name].cookies) {
-                    deleteCookie.bind(this)(cookieTarget);
+                for (let j = 0 ; j <  this.cookies[cookie_name].cookies.length ; j++) {
+                    deleteCookie.bind(this)(this.cookies[cookie_name].cookies[j]);
                 }
             }
         }
@@ -121,7 +127,7 @@ class CookieBox {
                 this.showSettings();
             };
         }
-        if (!this.isAccepted && this.options.onlySettings) {
+        if (this.options.onlySettings && !this.isAccepted) {
             this.showSettings();
         }
 
