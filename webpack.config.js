@@ -5,6 +5,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const merge = require('webpack-merge');
 
 const normalConfig = {
+    mode: 'development',
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'lib'),

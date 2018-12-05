@@ -14,9 +14,7 @@ function saveConfig() {
         isAccepted: this.isAccepted,
         acceptedCookies: []
     };
-    let cookieName = undefined;
-    for (let i = 0 ;  i < this.cookies.length ; i++) {
-        cookieName = this.cookies[i];
+    for (let cookieName in this.cookies) {
         if (this.cookies[cookieName].accepted) {
             config.acceptedCookies.push(cookieName);
         }
@@ -51,7 +49,7 @@ function show(elementClass) {
     document.getElementsByClassName(elementClass)[0].classList.remove(elementClass + '--hidden')
 }
 
-function onAccept(event) {
+function onAcceptCookies(event) {
     let selectedCookies = [];
     let cookie_name = '';
     let cookie = undefined;
@@ -115,7 +113,7 @@ class CookieBox {
         if (doriaAcceptForm) {
             doriaAcceptForm.onsubmit = (event) => {
                 event.preventDefault();
-                onAccept.bind(this)(event);
+                onAcceptCookies.bind(this)(event);
                 this.hideBanner();
                 return false;
             };
