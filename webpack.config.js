@@ -1,9 +1,11 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const merge = require('webpack-merge');
 
-
-module.exports = {
+const normalConfig = {
+    mode: 'development',
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'lib'),
@@ -42,7 +44,7 @@ module.exports = {
                         "presets": [
                             ["@babel/preset-env", {
                                 "useBuiltIns": "usage",
-                                //"debug": true,
+                                "debug": true,
                                 "targets": {
                                     "browsers": [
                                         "> 3%",
@@ -71,6 +73,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
@@ -79,3 +82,39 @@ module.exports = {
         })
     ]
 };
+
+const ie11Config = merge({}, normalConfig);
+
+ie11Config.output = {
+    path: path.resolve(__dirname, 'lib'),
+    filename: 'doria-ie11.js',
+    library: 'doria',
+    libraryTarget: 'umd'
+};
+ie11Config.module.rules[1] = {
+    test: /\.js$/,
+    include: [
+        path.resolve(__dirname, "src")
+    ],
+    exclude: /(node_modules|bower_components)/,
+    use: {
+        loader: 'babel-loader',
+        options: {
+            "presets": [
+                ["@babel/preset-env", {
+                    "useBuiltIns": "usage",
+                    "debug": true,
+                    "targets": {
+                        "browsers": [
+                            "> 3%",
+                            "safari >= 10",
+                            "ie >= 11"
+                        ]
+                    }
+                }]
+            ]
+        }
+    }
+},
+
+module.exports = [ normalConfig, ie11Config ];

@@ -24,11 +24,15 @@
         "null-loader": "^0.1.1",
         "sass-loader": "^7.0.3",
         "webpack": "^4.16.1",
-        "webpack-cli": "^3.1.0"
+        "webpack-bundle-analyzer": "^3.0.3",
+        "webpack-cli": "^3.1.0",
+        "webpack-merge": "^4.1.4"
     },
     "scripts": {
         "dev": "webpack --config webpack.config.js --watch",
-        "build": "webpack -p",
+        "build": "webpack -d",
+        "build-dev": "webpack",
+
         "test": "./node_modules/karma/bin/karma start",
         "ci": "./node_modules/karma/bin/karma start --single-run",
         "devtest": "./node_modules/karma/bin/karma start"

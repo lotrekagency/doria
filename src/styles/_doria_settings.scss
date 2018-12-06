@@ -90,6 +90,7 @@
   }
 
   &__input {
+    cursor: pointer;
     position: relative;
   }
 
@@ -118,7 +119,6 @@
     min-width: 4rem;
     position: relative;
     background-color: $errorBackgroundColorCheckbox;
-    border-radius: 1.8rem;
     transition: background-color 0.18s ease-in;
 
     &:after{
@@ -130,7 +130,6 @@
       top: 50%;
       transform: translateY(-50%);
       position: absolute;
-      border-radius: 100%;
       transition: left 0.15s;
     }
 
