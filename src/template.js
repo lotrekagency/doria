@@ -3,7 +3,7 @@ let render = (templateId, destination, content, data) => {
     let tmpl = (str, data) => {
         // Figure out if we're getting a template, or if we need to
         // load the template - and be sure to cache the result.
-        let fn = !/\W/.test(str) ?
+        let fn = !/<\s*\w+[^>]*>(.*?)<\s*\/\s*\w+>/.test(str) ?
             cache[str] = cache[str] ||
             tmpl(document.getElementById(str) ? document.getElementById(str).innerHTML : content) :
             // Generate a reusable function that will serve as a template
