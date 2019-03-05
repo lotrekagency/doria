@@ -1,8 +1,10 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
+const TerserPlugin = require('terser-webpack-plugin');
+const SizePlugin = require("size-plugin");
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const normalConfig = {
     mode: 'development',
@@ -23,6 +25,10 @@ const normalConfig = {
         builtAt: false
 
     },
+    optimization: {
+        minimizer: [
+          new OptimizeCssAssetsPlugin({})
+        ]},
     module: {
         rules: [{
                 test: /\.scss$/,
@@ -73,13 +79,19 @@ const normalConfig = {
         ]
     },
     plugins: [
-        new BundleAnalyzerPlugin(),
+        new TerserPlugin(),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
-        })
+        }),
+        new OptimizeCssAssetsPlugin({
+            cssProcessor: require('cssnano'),
+          }),
+        new SizePlugin(),
+        new BundleAnalyzerPlugin(),
+
     ]
 };
 

@@ -1,4 +1,4 @@
-.doriabanner {
+.db {
   background-color: $backgroundBanner;
   color: $colorText;
   font-size: 1em;
@@ -8,17 +8,17 @@
   bottom: 0;
   width: 100%;
   z-index: 110;
-  &__description {
+  &__des {
     padding: 0px 5%;
   }
-  &__buttons {
+  &__btns {
     padding: 0.5rem 5%;
     @media(min-width: 992px) {
       text-align: right;
     }
   }
 
-  &__button {
+  &__btn {
     width: 100%;
     cursor: pointer;
     background-color: $backgroundColorButton;

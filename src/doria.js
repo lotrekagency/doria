@@ -135,11 +135,11 @@ class CookieBox {
         if (this.options.onlySettings) {
             return;
         }
-        hide('doriabanner');
+        hide('db');
     }
 
     hideSettings() {
-        hide('doriasettings__wrapper');
+        hide('ds__wrapper');
     }
 
     on(key, f) {
@@ -158,11 +158,11 @@ class CookieBox {
         if (this.options.onlySettings) {
             return;
         }
-        show('doriabanner');
+        show('db');
     }
 
     showSettings() {
-        show('doriasettings__wrapper');
+        show('ds__wrapper');
     }
 
 }
