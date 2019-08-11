@@ -1,4 +1,4 @@
-.doriasettings {
+.ds {
   background-color: $backgroundSettings;
   color: $colorTextSettings;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -18,7 +18,7 @@
     padding: 0.5rem 0;
     border-bottom: 1px solid #010101;
   }
-  &__subtitle {
+  &__stitle {
     padding-top: 1rem;
     padding-bottom: 0.7rem;
   }
@@ -41,7 +41,7 @@
     }
   }
 
-  &__button {
+  &__btn {
     width: 100%;
     cursor: pointer;
     background-color: $backgroundColorButton;
@@ -68,20 +68,20 @@
 
 }
 
-.checkbox {
+.cbx {
 
   &__wrapper{
     margin-right: 0.5rem;
   }
 
-  &__container {
+  &__cnt {
     display: flex;
     flex: 1;
     flex-direction: row;
     align-self: center;
     padding: 1rem 0;
   }
-  &__description {
+  &__desc {
     margin: 0.2rem 0;
   }
 
