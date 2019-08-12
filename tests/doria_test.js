@@ -1,32 +1,36 @@
 import {
     prepare,
     loadScript
-} from '../src/index'
+} from '../src/index';
+import { doesNotReject } from 'assert';
 
-let assert = require('chai').assert
+let assert = require('chai').assert;
 let EventEmitter = require('events');
 
 let cleanElements = () => {
     let settingsContent = document.getElementById("doria_settings_content");
     let bannerContent = document.getElementById("doria_banner_content");
 
-    if (bannerContent) {
-        bannerContent.outerHTML = "";
-    }
-
-    if (settingsContent) {
-        settingsContent.outerHTML = "";
-    }
+    if (settingsContent)
+        settingsContent.parentNode.removeChild(settingsContent);
+    if (bannerContent)
+        bannerContent.parentNode.removeChild(bannerContent);
 };
 
+let doria;
+
 beforeEach(function () {
-    localStorage.removeItem('doria__settings');
+    if (doria) {
+        doria.reset();
+    }
+    cleanElements();
+    global.localStorage.removeItem('doria__settings');
 });
 
 describe('Doria Cookie box', function () {
 
     it('renders without problems', function () {
-        let doria = prepare();
+        doria = prepare();
         let doriaAcceptForm = document.getElementById('doria_accept_form');
         assert.equal(doriaAcceptForm, undefined);
         doria.bake();
@@ -37,8 +41,7 @@ describe('Doria Cookie box', function () {
     });
 
     it('renders without problems only settings', function () {
-        cleanElements();
-        let doria = prepare({
+        doria = prepare({
             onlySettings: true
         });
         let doriaAcceptForm = document.getElementById('doria_accept_form');
@@ -48,10 +51,14 @@ describe('Doria Cookie box', function () {
         assert.equal(doriaBannerContent, undefined);
         doriaAcceptForm = document.getElementById('doria_accept_form');
         assert.notEqual(doriaAcceptForm, undefined);
+        // hideBanner and showBanner are now disabled
+        doria.hideBanner();
+        doria.showBanner();
+        assert.equal(doriaBannerContent, undefined);
     });
 
     it('stores cookie settings', function () {
-        let doria = prepare();
+        doria = prepare();
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
         doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
         doria.addCookieSettings('performances', 'Performances', 'Accept Performances cookies', []);
@@ -62,7 +69,7 @@ describe('Doria Cookie box', function () {
     });
 
     it('calls appropriate functions after bake', function (done) {
-        let doria = prepare();
+        doria = prepare();
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
 
         let emitter = new EventEmitter();
@@ -78,7 +85,7 @@ describe('Doria Cookie box', function () {
     });
 
     it('calls onAccept after click accept button', function (done) {
-        let doria = prepare();
+        doria = prepare();
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
 
         let emitter = new EventEmitter();
@@ -94,17 +101,17 @@ describe('Doria Cookie box', function () {
     });
 
     it('storages settings', function (done) {
-        let doria = prepare();
+        doria = prepare();
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
 
-        let settings = JSON.parse(localStorage.getItem('doria__settings'));
+        let settings = JSON.parse(global.localStorage.getItem('doria__settings'));
         assert.equal(settings, null);
 
         doria.bake();
         document.querySelector('input[type*="submit"]').click();
 
         setTimeout(() => {
-            let settings = JSON.parse(localStorage.getItem('doria__settings'));
+            let settings = JSON.parse(global.localStorage.getItem('doria__settings'));
             assert.equal(settings.isAccepted, true);
             done();
         });
@@ -112,11 +119,11 @@ describe('Doria Cookie box', function () {
 
     it('starts with mandatory settings', function () {
         let config = {
-            isAccepted: this.isAccepted,
+            isAccepted: false,
             acceptedCookies: ['default', 'marketing']
-        }
-        localStorage.setItem('doria__settings', JSON.stringify(config));
-        let doria = prepare();
+        };
+        global.localStorage.setItem('doria__settings', JSON.stringify(config));
+        doria = prepare();
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
         doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
 
@@ -127,15 +134,9 @@ describe('Doria Cookie box', function () {
         for (let i = 0; i < checkboxes.length; i++) {
             assert.equal(checkboxes[i].checked, true);
         }
-
     });
 
     it('deletes cookies on unchecking option and accept', function (done) {
-        let config = {
-            isAccepted: this.isAccepted,
-            acceptedCookies: ['default', 'marketing']
-        }
-        localStorage.setItem('doria__settings', JSON.stringify(config));
 
         let simulateDeletion = () => {
 
@@ -153,10 +154,12 @@ describe('Doria Cookie box', function () {
                 assert.notInclude(document.cookie, '_gat');
                 assert.notInclude(document.cookie, '_gid');
                 done();
-            }, 1000)
+            }, 1000);
         };
 
-        let doria = prepare();
+        doria = prepare({
+            onlySettings: true
+        });
         doria.addCookieSettings(
             'default',
             'Default',
@@ -183,12 +186,22 @@ describe('Doria Cookie box', function () {
             loadScript("https://www.google-analytics.com/analytics.js").then(
                 () => simulateDeletion()
             );
-
         });
 
         doria.bake();
         document.querySelector('input[type*="submit"]').click();
 
+    });
+
+    it('shows settings on banner click', function () {
+        doria = prepare();
+        doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
+        doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
+        doria.on('default', () => {});
+        doria.bake();
+        assert.equal(document.getElementsByClassName('ds__wrapper--hidden').length, 1);
+        document.getElementById('doria_settings').click();
+        assert.equal(document.getElementsByClassName('ds__wrapper--hidden').length, 0);
     });
 
 });

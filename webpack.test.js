@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+    mode: 'development',
     module: {
         rules: [
             {
@@ -16,7 +17,7 @@ module.exports = {
                 use: {
                     loader: 'istanbul-instrumenter-loader',
                     query: {
-                    esModules: true
+                        esModules: true
                     },
                 },
 

@@ -90,7 +90,7 @@ const normalConfig = {
             cssProcessor: require('cssnano'),
           }),
         new SizePlugin(),
-        new BundleAnalyzerPlugin(),
+        //new BundleAnalyzerPlugin(),
 
     ]
 };

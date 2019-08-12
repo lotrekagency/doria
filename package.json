@@ -35,8 +35,7 @@
         "dev": "webpack --config webpack.config.js --watch",
         "build": "webpack -d",
         "build-dev": "webpack",
-        "test": "./node_modules/karma/bin/karma start",
-        "ci": "./node_modules/karma/bin/karma start --single-run",
-        "devtest": "./node_modules/karma/bin/karma start"
+        "test": "./node_modules/karma/bin/karma start --single-run",
+        "test-dev": "./node_modules/karma/bin/karma start"
     }
 }

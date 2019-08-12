@@ -42,11 +42,15 @@ function restoreConfig() {
 }
 
 function hide(elementClass) {
-    document.getElementsByClassName(elementClass)[0].classList.add(elementClass + '--hidden');
+    if (document.getElementsByClassName(elementClass)[0]) {
+        document.getElementsByClassName(elementClass)[0].classList.add(elementClass + '--hidden');
+    }
 }
 
 function show(elementClass) {
-    document.getElementsByClassName(elementClass)[0].classList.remove(elementClass + '--hidden');
+    if (document.getElementsByClassName(elementClass)[0]) {
+        document.getElementsByClassName(elementClass)[0].classList.remove(elementClass + '--hidden');
+    }
 }
 
 function onAcceptCookies(event) {
@@ -85,6 +89,12 @@ class CookieBox {
 
     constructor() {
         this.cookies = {};
+        this.isAccepted = false;
+    }
+
+    reset() {
+        this.cookies = {};
+        this.isAccepted = false;
     }
 
     acceptOnNavigation() {
