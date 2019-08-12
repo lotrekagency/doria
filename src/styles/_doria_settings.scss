@@ -99,7 +99,7 @@
     height: 1px;
     width: 1px;
 
-    &:checked ~ .checkbox__value{
+    &:checked ~ .cbx__value{
       background-color: $validBackgroundColorCheckbox;
 
       &:after{
