@@ -1,9 +1,5 @@
 {
-    "dependencies": {
-        "optimize-css-assets-webpack-plugin": "^5.0.1",
-        "size-plugin": "^1.1.2",
-        "terser-webpack-plugin": "^1.2.3"
-    },
+    "dependencies": {},
     "devDependencies": {
         "@babel/core": "^7.3.4",
         "@babel/preset-env": "^7.3.4",
@@ -26,7 +22,10 @@
         "mocha": "^5.2.0",
         "node-sass": "^4.11.0",
         "null-loader": "^0.1.1",
+        "optimize-css-assets-webpack-plugin": "^5.0.1",
         "sass-loader": "^7.1.0",
+        "size-plugin": "^1.1.2",
+        "terser-webpack-plugin": "^1.2.3",
         "webpack": "^4.29.0",
         "webpack-bundle-analyzer": "^3.0.3",
         "webpack-cli": "^3.1.0",
