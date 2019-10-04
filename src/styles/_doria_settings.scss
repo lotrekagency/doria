@@ -1,154 +1,173 @@
 .ds {
-  background-color: $backgroundSettings;
-  color: $colorTextSettings;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  padding: 1.2rem 1.5rem;
-  position: relative;
-  top: 15%;
-  border-radius: 4px;
-  z-index: 120;
-
-  @media(min-width: 992px) {
-    width: 600px;
+    font-size: 13px;
+    padding: 13px;
+    background-color: $backgroundSettings;
+    color: $colorTextSettings;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    position: relative;
+    top: 10%;
     margin: 0 auto;
-  }
-
-  &__title {
-    font-weight: bold;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #010101;
-  }
-  &__stitle {
-    padding-top: 1rem;
-    padding-bottom: 0.7rem;
-  }
-
-  &__wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: $backgroundSettingsWrapper;
-    z-index: 110;
-
-    &--hidden {
-      pointer-events: none;
-      animation-name: invisible;
-      opacity: 0;
-      animation-duration: 0s;
-      animation-timing-function: ease-in-out;
-    }
-  }
-
-  &__btn {
-    width: 100%;
-    cursor: pointer;
-    background-color: $backgroundColorButton;
-    color: $colorText;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 16px;
-    font-size: 0.9em;
-    margin: 0.2rem 0;
-    transition: box-shadow .3s;
+    max-width: 90vw;
+    border-radius: 4px;
+    z-index: 1000;
     @media(min-width: 992px) {
-      width: auto;
-      margin: 0.5rem 0;
+        width: 600px;
+        margin: 0 auto;
+        font-size: 14px;
+        padding: 14px;
     }
-    &:hover {
-      background-color: $hoverColorButton;
-      box-shadow: 0 0 11px rgba(33, 33, 33, .2);
-    }
-  }
 
-  &__beforeaccept{
-    margin: 1rem 0;
-  }
+    &__title {
+        font-weight: bold;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #010101;
+    }
+
+    &__stitle {
+        padding-top: 13px;
+        padding-bottom: 0;
+        @media(min-width: 992px) {
+            padding-top: 14px;
+        }
+    }
+
+    &__wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: $backgroundSettingsWrapper;
+        z-index: 110;
+
+        &--hidden {
+            pointer-events: none;
+            animation-name: invisible;
+            opacity: 0;
+            animation-duration: 0s;
+            animation-timing-function: ease-in-out;
+        }
+    }
+
+    &__btn {
+        width: 100%;
+        cursor: pointer;
+        background-color: $backgroundColorButton;
+        color: $colorText;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 16px;
+        font-size: 0.9em;
+        margin: 0.2rem 0;
+        transition: box-shadow .3s;
+
+        @media(min-width: 992px) {
+            width: auto;
+            margin: 0.5rem 0;
+        }
+
+        &:hover {
+            background-color: $hoverColorButton;
+            box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+        }
+    }
+
+    &__beforeaccept {
+        margin: 13px 0;
+        @media(min-width: 992px) {
+            margin: 14px 0;
+        }
+    }
 
 }
 
 .cbx {
 
-  &__wrapper{
-    margin-right: 0.5rem;
-  }
-
-  &__cnt {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    align-self: center;
-    padding: 1rem 0;
-  }
-  &__desc {
-    margin: 0.2rem 0;
-  }
-
-  &__label {
-    font-weight: bold;
-  }
-
-  &__input {
-    cursor: pointer;
-    position: relative;
-  }
-
-  &--custom{
-    position: absolute;
-    height: 1px;
-    width: 1px;
-
-    &:checked ~ .cbx__value{
-      background-color: $validBackgroundColorCheckbox;
-
-      &:after{
-        left: calc(90% - 20px);
-      }
-      &:before{
-        content: '';
-        right: 0;
-        left: 10px;
-      }
-    }
-  }
-
-  &__value{
-    display: inline-block;
-    padding: 0.9rem 0.6rem;
-    min-width: 4rem;
-    position: relative;
-    background-color: $errorBackgroundColorCheckbox;
-    transition: background-color 0.18s ease-in;
-
-    &:after{
-      content: " ";
-      width: 20px;
-      height: 20px;
-      background-color: white;
-      left: 5%;
-      top: 50%;
-      transform: translateY(-50%);
-      position: absolute;
-      transition: left 0.15s;
+    &__wrapper {
+        margin-right: 10px;
     }
 
-    &:before{
-      position: absolute;
-      content: '';
-      color: white;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
+    &__cnt {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        align-self: center;
+        margin: 13px 0;
+        @media(min-width: 992px) {
+            margin: 14px 0;
+        }
     }
-  }
+
+    &__desc {
+        margin: 4px 0 0;
+    }
+
+    &__label {
+        font-weight: bold;
+    }
+
+    &__input {
+        cursor: pointer;
+        position: relative;
+    }
+
+    &--custom {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+
+        &:checked~.cbx__value {
+            background-color: $validBackgroundColorCheckbox;
+
+            &:after {
+                left: calc(90% - 20px);
+            }
+
+            &:before {
+                content: '';
+                right: 0;
+                left: 10px;
+            }
+        }
+    }
+
+    &__value {
+        display: inline-block;
+        padding: 14px 9px;
+        min-width: 64px;
+        position: relative;
+        background-color: $errorBackgroundColorCheckbox;
+        transition: background-color 0.18s ease-in;
+
+        &:after {
+            content: " ";
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            position: absolute;
+            transition: left 0.15s;
+        }
+
+        &:before {
+            position: absolute;
+            content: '';
+            color: white;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
 }
 
 @keyframes invisible {
     from {
-      opacity: 1;
+        opacity: 1;
     }
+
     to {
-      opacity: 0;
+        opacity: 0;
     }
-  }
+}
