@@ -5,13 +5,16 @@
     color: $colorTextSettings;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     position: relative;
-    top: 15%;
+    top: 10%;
+    margin: 0 auto;
+    max-width: 90vw;
     border-radius: 4px;
     z-index: 1000;
-
     @media(min-width: 992px) {
         width: 600px;
         margin: 0 auto;
+        font-size: 14px;
+        padding: 14px;
     }
 
     &__title {
@@ -23,6 +26,9 @@
     &__stitle {
         padding-top: 13px;
         padding-bottom: 0;
+        @media(min-width: 992px) {
+            padding-top: 14px;
+        }
     }
 
     &__wrapper {
@@ -68,6 +74,9 @@
 
     &__beforeaccept {
         margin: 13px 0;
+        @media(min-width: 992px) {
+            margin: 14px 0;
+        }
     }
 
 }
@@ -75,7 +84,7 @@
 .cbx {
 
     &__wrapper {
-        margin-right: 0.5rem;
+        margin-right: 10px;
     }
 
     &__cnt {
@@ -84,10 +93,13 @@
         flex-direction: row;
         align-self: center;
         margin: 13px 0;
+        @media(min-width: 992px) {
+            margin: 14px 0;
+        }
     }
 
     &__desc {
-        margin: 0.2rem 0;
+        margin: 4px 0 0;
     }
 
     &__label {
@@ -121,8 +133,8 @@
 
     &__value {
         display: inline-block;
-        padding: 0.9rem 0.6rem;
-        min-width: 4rem;
+        padding: 14px 9px;
+        min-width: 64px;
         position: relative;
         background-color: $errorBackgroundColorCheckbox;
         transition: background-color 0.18s ease-in;
