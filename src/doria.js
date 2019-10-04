@@ -29,7 +29,6 @@ function restoreConfig() {
     }
     config = JSON.parse(config);
     this.isAccepted = config.isAccepted;
-    let acceptedCookie = undefined;
     for(let prop in this.cookies){
         if( config.acceptedCookies.includes(prop)){ 
             this.cookies[prop].accepted = true;
