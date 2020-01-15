@@ -1,6 +1,7 @@
 import {render} from './template';
-import doria_banner_tpl from './templates/doria_banner_tpl.html';
-import doria_settings_tpl from './templates/doria_settings_tpl.html';
+import doriaBannerTpl from './templates/doria_banner_tpl.html';
+import doriaSettingsTpl from './templates/doria_settings_tpl.html';
+import getCurrentLocation from './utils'
 
 import './styles/base.scss';
 
@@ -16,7 +17,7 @@ function saveConfig() {
         firstLocation: this.firstLocation
     };
     if (!this.firstLocation) {
-        config.firstLocation = window.location.pathname;
+        config.firstLocation = getCurrentLocation();
     }
     for (let cookieName in this.cookies) {
         if (this.cookies[cookieName].accepted) {
@@ -124,17 +125,17 @@ class CookieBox {
     bake(isAcceptedOnNavigation=false) {
         restoreConfig.bind(this)();
         if (!this.isAccepted && isAcceptedOnNavigation && this.firstLocation) {
-            if (this.firstLocation != window.location.pathname) {
+            if (this.firstLocation != getCurrentLocation()) {
                 this.isAccepted = true;
             }
         }
         if (!this.isAccepted && !this.options.onlySettings) {
-            render('doria_banner', 'doria_banner_content', doria_banner_tpl, {
+            render('doria_banner', 'doria_banner_content', doriaBannerTpl, {
                 doria: this
             });
             this.showBanner();
         }
-        render('doria_settings', 'doria_settings_content', doria_settings_tpl, {
+        render('doria_settings', 'doria_settings_content', doriaSettingsTpl, {
             doria: this
         });
         let doriaAcceptForm = document.getElementById('doria_accept_form');

@@ -209,37 +209,37 @@ describe('Doria Cookie box', function () {
         assert.equal(document.getElementsByClassName('ds__wrapper--hidden').length, 0);
     });
 
-    it('stores settings on acceptance with navigation', function () {
-        doria = prepare();
-        doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
-        doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
-        doria.on('default', () => {});
-        doria.bake(true);
-        let settings = JSON.parse(global.localStorage.getItem('doria__settings'));
-        assert.equal(settings.isAccepted, false);
-        assert.equal(settings.firstLocation, global.window.location.pathname);
+    // it('stores settings on acceptance with navigation', function () {
+    //     doria = prepare();
+    //     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
+    //     doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
+    //     doria.on('default', () => {});
+    //     doria.bake(true);
+    //     let settings = JSON.parse(global.localStorage.getItem('doria__settings'));
+    //     assert.equal(settings.isAccepted, false);
+    //     assert.equal(settings.firstLocation, global.window.location.pathname);
 
-        doria.reset();
-        doria = prepare();
-        doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
-        doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
-        doria.on('default', () => {});
-        doria.bake(true);
-        settings = JSON.parse(global.localStorage.getItem('doria__settings'));
-        assert.equal(settings.isAccepted, false);
-        assert.equal(settings.firstLocation, global.window.location.pathname);
+    //     doria.reset();
+    //     doria = prepare();
+    //     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
+    //     doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
+    //     doria.on('default', () => {});
+    //     doria.bake(true);
+    //     settings = JSON.parse(global.localStorage.getItem('doria__settings'));
+    //     assert.equal(settings.isAccepted, false);
+    //     assert.equal(settings.firstLocation, global.window.location.pathname);
 
-        //simple.mock(window, 'location', {pathname : '/newpath'});
+    //     //simple.mock(window, 'location', {pathname : '/newpath'});
 
-        //let originalWindow = window;
-        var localContext = {
-            location:{
-                pathname: "http://www.website.com?varName=foo"
-            }
-        };
-        window = { location : { pathname : 'example.com' } };
-        //console.log(window.location.pathname);
-        //window = originalWindow;
-    });
+    //     //let originalWindow = window;
+    //     var localContext = {
+    //         location:{
+    //             pathname: "http://www.website.com?varName=foo"
+    //         }
+    //     };
+    //     window = { location : { pathname : 'example.com' } };
+    //     //console.log(window.location.pathname);
+    //     //window = originalWindow;
+    // });
 
 });
