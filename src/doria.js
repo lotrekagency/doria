@@ -62,25 +62,33 @@ function show(elementClass) {
 
 function onAcceptCookies(event) {
     let selectedCookies = [];
-    let cookie_name = '';
+    let cookieName = '';
     let cookie = undefined;
-    for (let i = 0 ; i < event.target.length ; i++) {
-        cookie = event.target[i];
-        cookie_name = cookie.name;
-        if (cookie_name in this.cookies) {
-            if (cookie.checked === true && this.cookies[cookie_name].handler) {
-                this.cookies[cookie_name].accepted = true;
-                if (this.cookies[cookie_name]) {
-                    this.cookies[cookie_name].handler();
+    if (event) {
+        for (let i = 0 ; i < event.target.length ; i++) {
+            cookie = event.target[i];
+            cookieName = cookie.name;
+            if (cookieName in this.cookies) {
+                if (cookie.checked === true && this.cookies[cookieName].handler) {
+                    this.cookies[cookieName].accepted = true;
+                    if (this.cookies[cookieName]) {
+                        this.cookies[cookieName].handler();
+                    }
+                    selectedCookies.push(cookieName);
                 }
-                selectedCookies.push(cookie_name);
-            }
-            if (cookie.checked === false) {
-                this.cookies[cookie_name].accepted = false;
+                if (cookie.checked === false) {
+                    this.cookies[cookieName].accepted = false;
 
-                for (let j = 0 ; j <  this.cookies[cookie_name].cookies.length ; j++) {
-                    deleteCookie.bind(this)(this.cookies[cookie_name].cookies[j]);
+                    for (let j = 0 ; j <  this.cookies[cookieName].cookies.length ; j++) {
+                        deleteCookie.bind(this)(this.cookies[cookieName].cookies[j]);
+                    }
                 }
+            }
+        }
+    } else {
+        for (cookieName in this.cookies) {
+            if (this.cookies[cookieName].accepted  && this.cookies[cookieName].handler) {
+                this.cookies[cookieName].handler();
             }
         }
     }
@@ -149,7 +157,7 @@ class CookieBox {
         if (doriaBannerAcceptBtn) {
             doriaBannerAcceptBtn.onclick = (event) => {
                 event.preventDefault();
-                onAcceptCookies.bind(this)(event);
+                onAcceptCookies.bind(this)();
                 this.hideBanner();
                 return false;
             };
