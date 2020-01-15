@@ -34,15 +34,15 @@ function restoreConfig() {
     config = JSON.parse(config);
     this.isAccepted = config.isAccepted;
     this.firstLocation = config.firstLocation;
-    let acceptedCookie = undefined;
     if (this.isAccepted) {
-        for (let i = 0 ; i < config.acceptedCookies.length ; i++) {
-            acceptedCookie = config.acceptedCookies[i];
-            if (acceptedCookie in this.cookies) {
-                this.cookies[acceptedCookie].accepted = true;
-                if (this.cookies[acceptedCookie].handler) {
-                    this.cookies[acceptedCookie].handler();
+        for(let prop in this.cookies){
+            if( config.acceptedCookies.includes(prop)){
+                this.cookies[prop].accepted = true;
+                if (this.cookies[prop].handler) {
+                    this.cookies[prop].handler();
                 }
+            } else{
+                this.cookies[prop].accepted = false;
             }
         }
     }
