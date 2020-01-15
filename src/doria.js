@@ -106,11 +106,11 @@ class CookieBox {
         this.firstLocation = null;
     }
 
-    addCookieSettings(key, label, description, cookies, mandatory=false) {
+    addCookieSettings(key, label, description, cookies, mandatory=false, preSelected=true) {
         this.cookies[key] = {
             label, description, cookies, mandatory
         };
-        this.cookies[key].accepted = true;
+        this.cookies[key].accepted = preSelected;
     }
 
     bake(isAcceptedOnNavigation=false) {
