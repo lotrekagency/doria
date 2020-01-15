@@ -1,7 +1,9 @@
 <div class="db <% if (doria.isAccepted) { %> db--hidden <% } %>">
+  <div class="db__btns"><button id="doria_b_close" class="db__btn db__cbtn">X</button></div>
   <div class="db__desc"><%=doria.options.bannerDescription%></div>
   <div class="db__btns">
     <button id="doria_settings" class="db__btn db__sbtn"><%=doria.options.settingsButtonLabel%></button>
-    <button class="db__btn db__cbtn"><%=doria.options.closeButtonLabel%></button>
+
+    <button id="doria_b_accept" class="db__btn db__abtn"><%=doria.options.acceptButtonLabel%></button>
   </div>
 </div>

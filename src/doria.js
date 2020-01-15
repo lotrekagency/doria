@@ -12,8 +12,12 @@ function deleteCookie(name) {
 function saveConfig() {
     let config = {
         isAccepted: this.isAccepted,
-        acceptedCookies: []
+        acceptedCookies: [],
+        firstLocation: this.firstLocation
     };
+    if (!this.firstLocation) {
+        config.firstLocation = window.location.pathname;
+    }
     for (let cookieName in this.cookies) {
         if (this.cookies[cookieName].accepted) {
             config.acceptedCookies.push(cookieName);
@@ -29,13 +33,16 @@ function restoreConfig() {
     }
     config = JSON.parse(config);
     this.isAccepted = config.isAccepted;
+    this.firstLocation = config.firstLocation;
     let acceptedCookie = undefined;
-    for (let i = 0 ; i < config.acceptedCookies.length ; i++) {
-        acceptedCookie = config.acceptedCookies[i];
-        if (acceptedCookie in this.cookies) {
-            this.cookies[acceptedCookie].accepted = true;
-            if (this.cookies[acceptedCookie].handler) {
-                this.cookies[acceptedCookie].handler();
+    if (this.isAccepted) {
+        for (let i = 0 ; i < config.acceptedCookies.length ; i++) {
+            acceptedCookie = config.acceptedCookies[i];
+            if (acceptedCookie in this.cookies) {
+                this.cookies[acceptedCookie].accepted = true;
+                if (this.cookies[acceptedCookie].handler) {
+                    this.cookies[acceptedCookie].handler();
+                }
             }
         }
     }
@@ -90,15 +97,13 @@ class CookieBox {
     constructor() {
         this.cookies = {};
         this.isAccepted = false;
+        this.firstLocation = null;
     }
 
     reset() {
         this.cookies = {};
         this.isAccepted = false;
-    }
-
-    acceptOnNavigation() {
-        saveConfig.bind(this)();
+        this.firstLocation = null;
     }
 
     addCookieSettings(key, label, description, cookies, mandatory=false) {
@@ -108,8 +113,13 @@ class CookieBox {
         this.cookies[key].accepted = true;
     }
 
-    bake() {
+    bake(isAcceptedOnNavigation=false) {
         restoreConfig.bind(this)();
+        if (!this.isAccepted && isAcceptedOnNavigation && this.firstLocation) {
+            if (this.firstLocation != window.location.pathname) {
+                this.isAccepted = true;
+            }
+        }
         if (!this.isAccepted && !this.options.onlySettings) {
             render('doria_banner', 'doria_banner_content', doria_banner_tpl, {
                 doria: this
@@ -135,8 +145,28 @@ class CookieBox {
                 this.showSettings();
             };
         }
+        let doriaBannerAcceptBtn = document.getElementById('doria_b_accept');
+        if (doriaBannerAcceptBtn) {
+            doriaBannerAcceptBtn.onclick = (event) => {
+                event.preventDefault();
+                onAcceptCookies.bind(this)(event);
+                this.hideBanner();
+                return false;
+            };
+        }
+        let doriaBannerCloseBtn = document.getElementById('doria_b_close');
+        if (doriaBannerCloseBtn) {
+            doriaBannerCloseBtn.onclick = (event) => {
+                event.preventDefault();
+                this.hideBanner();
+            };
+        }
         if (this.options.onlySettings && !this.isAccepted) {
             this.showSettings();
+        }
+
+        if (!this.isAccepted && isAcceptedOnNavigation) {
+            saveConfig.bind(this)();
         }
 
     }

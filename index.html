@@ -33,6 +33,18 @@
         'Accetto l\'utilizzo di cookie analitici di terze parti',
         ['_ga', '_gat', '_gid']
       );
+      dd.addCookieSettings(
+        'tech',
+        'Tecnici',
+        'Accetto l\'utilizzo di cookie analitici di tecniche parti',
+        ['_ga', '_gat', '_gid']
+      );
+      dd.addCookieSettings(
+        'profile',
+        'Profilazione',
+        'Accetto l\'utilizzo di cookie analitici di profilazione',
+        ['_ga', '_gat', '_gid']
+      );
       dd.on('marketing', function() {
         console.log('Marketing cookies!');
         window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
@@ -45,6 +57,7 @@
         console.log('Yeah! 🍪');
       });
       dd.bake();
+      //dd.acceptOnNavigation();
     </script>
   </body>
 
