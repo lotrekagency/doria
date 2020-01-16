@@ -2,7 +2,7 @@
   <div class="db__desc"><%=doria.options.bannerDescription%></div>
   <div class="db__btns">
     <button id="doria_b_accept" class="db__btn db__abtn"><%=doria.options.acceptButtonLabel%></button>
-    <button id="doria_settings" class="db__btn db__sbtn"><%=doria.options.settingsButtonLabel%></button>
-    <button id="doria_b_close" class="db__btn db__cbtn"><%=doria.options.closeButtonLabel%></button>
+    <% if (doria.options.settingsButtonLabel) { %><button id="doria_settings" class="db__btn db__sbtn"><%=doria.options.settingsButtonLabel%></button><% } %>
+    <% if (doria.options.closeButtonLabel) { %><button id="doria_b_close" class="db__btn db__cbtn"><%=doria.options.closeButtonLabel%></button><% } %>
   </div>
 </div>

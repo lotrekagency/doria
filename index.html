@@ -24,20 +24,14 @@
         bannerDescription: "Doria utilizza i cookie per migliorare la tua esperienza nel sito. I cookie ti permettono di utilizzare alcune funzioni (come salvare il carrello), interagire con i social network (Facebook, Instagram, ecc.) e vedere messaggi e banner promozionali su misura per i tuoi interessi (sul nostro e sugli altri siti). Inoltre, ci permettono di analizzare l'utilizzo del nostro sito. Continuando a utilizzare il nostro sito acconsenti all'utilizzo dei cookie.",
         beforeAccept: "Cliccando su Accetto acconsenti all'utilizzo di cookie tecnici di prima parte",
         acceptButtonLabel: "Accetto",
-        settingsButtonLabel: "Impostazioni",
-        closeButtonLabel: "Chiudi",
+        settingsButtonLabel: "Impostazioni"
       });
-      dd.addCookieSettings(
-        'marketing',
-        'Marketing',
-        'Accetto l\'utilizzo di cookie analitici di terze parti',
-        ['_ga', '_gat', '_gid']
-      );
       dd.addCookieSettings(
         'tech',
         'Tecnici',
         'Accetto l\'utilizzo di cookie analitici di tecniche parti',
-        ['_ga', '_gat', '_gid']
+        [],
+        true
       );
       dd.addCookieSettings(
         'profile',
@@ -45,7 +39,7 @@
         'Accetto l\'utilizzo di cookie analitici di profilazione',
         ['_ga', '_gat', '_gid']
       );
-      dd.on('marketing', function() {
+      dd.on('profile', function() {
         console.log('Marketing cookies!');
         window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
         ga('create', 'UA-XXXX-Y', {"cookieDomain":"none"}); ga('send', 'pageview');
