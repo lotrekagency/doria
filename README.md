@@ -1,4 +1,5 @@
 # Doria
+[![Build Status](https://travis-ci.org/lotrekagency/doria.svg?branch=master)](https://travis-ci.org/lotrekagency/doria)
 
 🍪 The cookie box loved by cookies' fanatics
 
