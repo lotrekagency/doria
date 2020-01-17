@@ -21,8 +21,8 @@ module.exports = function(config) {
         ],
 
         plugins: [
-            'karma-firefox-launcher', 'karma-chai', 'karma-mocha',
-            'karma-chrome-launcher', 'karma-chai', 'karma-mocha',
+            'karma-firefox-launcher', 'karma-chrome-launcher',
+            'karma-chai', 'karma-mocha',
             'karma-sourcemap-loader', 'karma-webpack', 'karma-coverage',
             'karma-mocha-reporter', 'karma-coverage-istanbul-reporter'
         ],
@@ -40,7 +40,8 @@ module.exports = function(config) {
                 {
                     type: 'json',
                     dir: '.fecoverage/'
-                }
+                },
+                {type: 'lcov'}
             ],
             fixWebpackSourcePaths: true
         },

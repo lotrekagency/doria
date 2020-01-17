@@ -5,5 +5,8 @@ services:
   - xvfb
 before_script:
   - export DISPLAY=:99.0
+  - yarn add codecov
 script:
   - yarn test-ci
+after_script:
+  yarn codecov

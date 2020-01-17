@@ -38,6 +38,7 @@
         "build-dev": "webpack",
         "test": "./node_modules/karma/bin/karma start --single-run",
         "test-ci": "./node_modules/karma/bin/karma start --browsers Firefox --single-run",
-        "test-dev": "./node_modules/karma/bin/karma start"
+        "test-dev": "./node_modules/karma/bin/karma start",
+        "codecov": "codecov"
     }
 }
