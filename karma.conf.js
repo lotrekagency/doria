@@ -21,6 +21,7 @@ module.exports = function(config) {
         ],
 
         plugins: [
+            'karma-firefox-launcher', 'karma-chai', 'karma-mocha',
             'karma-chrome-launcher', 'karma-chai', 'karma-mocha',
             'karma-sourcemap-loader', 'karma-webpack', 'karma-coverage',
             'karma-mocha-reporter', 'karma-coverage-istanbul-reporter'
