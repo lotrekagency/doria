@@ -199,7 +199,7 @@ describe('Doria Cookie box', function () {
     });
 
     it('shows settings on banner click', function () {
-        doria = prepare();
+        doria = prepare({settingsButtonLabel: "Impostazioni"});
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
         doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
         doria.on('default', () => {});
