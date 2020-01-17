@@ -127,6 +127,8 @@ class CookieBox {
         if (!this.isAccepted && isAcceptedOnNavigation && this.firstLocation) {
             if (this.firstLocation != getCurrentLocation()) {
                 this.isAccepted = true;
+                saveConfig.bind(this)();
+                restoreConfig.bind(this)();
             }
         }
         if (!this.isAccepted && !this.options.onlySettings) {

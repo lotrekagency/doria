@@ -3,10 +3,12 @@ import {
     loadScript
 } from '../src/index';
 
-let assert = require('chai').assert;
-let EventEmitter = require('events');
-var simple = require('simple-mock');
+const utils = require('../src//utils');
 
+const chai = require('chai');
+
+let EventEmitter = require('events');
+var sinon = require('sinon');
 
 let cleanElements = () => {
     let settingsContent = document.getElementById("doria_settings_content");
@@ -21,7 +23,6 @@ let cleanElements = () => {
 let doria;
 
 afterEach(function () {
-    simple.restore();
 });
 
 beforeEach(function () {
@@ -37,12 +38,12 @@ describe('Doria Cookie box', function () {
     it('renders without problems', function () {
         doria = prepare();
         let doriaAcceptForm = document.getElementById('doria_accept_form');
-        assert.equal(doriaAcceptForm, undefined);
+        chai.assert.equal(doriaAcceptForm, undefined);
         doria.bake();
         let doriaBannerContent = document.getElementById('doria_banner_content');
-        assert.notEqual(doriaBannerContent, undefined);
+        chai.assert.notEqual(doriaBannerContent, undefined);
         doriaAcceptForm = document.getElementById('doria_accept_form');
-        assert.notEqual(doriaAcceptForm, undefined);
+        chai.assert.notEqual(doriaAcceptForm, undefined);
     });
 
     it('renders without problems only settings', function () {
@@ -50,16 +51,16 @@ describe('Doria Cookie box', function () {
             onlySettings: true
         });
         let doriaAcceptForm = document.getElementById('doria_accept_form');
-        assert.equal(doriaAcceptForm, undefined);
+        chai.assert.equal(doriaAcceptForm, undefined);
         doria.bake();
         let doriaBannerContent = document.getElementById('doria_banner_content');
-        assert.equal(doriaBannerContent, undefined);
+        chai.assert.equal(doriaBannerContent, undefined);
         doriaAcceptForm = document.getElementById('doria_accept_form');
-        assert.notEqual(doriaAcceptForm, undefined);
+        chai.assert.notEqual(doriaAcceptForm, undefined);
         // hideBanner and showBanner are now disabled
         doria.hideBanner();
         doria.showBanner();
-        assert.equal(doriaBannerContent, undefined);
+        chai.assert.equal(doriaBannerContent, undefined);
     });
 
     it('stores cookie settings', function () {
@@ -67,10 +68,10 @@ describe('Doria Cookie box', function () {
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
         doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
         doria.addCookieSettings('performances', 'Performances', 'Accept Performances cookies', []);
-        assert.equal(doria.cookies['default'].label, 'Default');
-        assert.equal(doria.cookies['default'].mandatory, true);
-        assert.equal(doria.cookies['marketing'].label, 'Marketing');
-        assert.equal(doria.cookies['marketing'].mandatory, false);
+        chai.assert.equal(doria.cookies['default'].label, 'Default');
+        chai.assert.equal(doria.cookies['default'].mandatory, true);
+        chai.assert.equal(doria.cookies['marketing'].label, 'Marketing');
+        chai.assert.equal(doria.cookies['marketing'].mandatory, false);
     });
 
     it('calls appropriate functions after bake', function (done) {
@@ -110,14 +111,14 @@ describe('Doria Cookie box', function () {
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
 
         let settings = JSON.parse(global.localStorage.getItem('doria__settings'));
-        assert.equal(settings, null);
+        chai.assert.equal(settings, null);
 
         doria.bake();
         document.querySelector('input[type*="submit"]').click();
 
         setTimeout(() => {
             let settings = JSON.parse(global.localStorage.getItem('doria__settings'));
-            assert.equal(settings.isAccepted, true);
+            chai.assert.equal(settings.isAccepted, true);
             done();
         });
     });
@@ -137,7 +138,7 @@ describe('Doria Cookie box', function () {
         doria.bake();
         let checkboxes = document.querySelectorAll("input[type='checkbox']");
         for (let i = 0; i < checkboxes.length; i++) {
-            assert.equal(checkboxes[i].checked, true);
+            chai.assert.equal(checkboxes[i].checked, true);
         }
     });
 
@@ -146,18 +147,18 @@ describe('Doria Cookie box', function () {
         let simulateDeletion = () => {
 
             setTimeout(() => {
-                assert.include(document.cookie, '_ga');
-                assert.include(document.cookie, '_gat');
-                assert.include(document.cookie, '_gid');
+                chai.assert.include(document.cookie, '_ga');
+                chai.assert.include(document.cookie, '_gat');
+                chai.assert.include(document.cookie, '_gid');
                 let checkboxes = document.querySelectorAll("input[type='checkbox']");
                 for (let i = 0; i < checkboxes.length; i++) {
-                    assert.equal(checkboxes[i].checked, true);
+                    chai.assert.equal(checkboxes[i].checked, true);
                     checkboxes[i].click();
                 }
                 document.querySelector('input[type*="submit"]').click();
-                assert.notInclude(document.cookie, '_ga');
-                assert.notInclude(document.cookie, '_gat');
-                assert.notInclude(document.cookie, '_gid');
+                chai.assert.notInclude(document.cookie, '_ga');
+                chai.assert.notInclude(document.cookie, '_gat');
+                chai.assert.notInclude(document.cookie, '_gid');
                 done();
             }, 1000);
         };
@@ -204,42 +205,34 @@ describe('Doria Cookie box', function () {
         doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
         doria.on('default', () => {});
         doria.bake();
-        assert.equal(document.getElementsByClassName('ds__wrapper--hidden').length, 1);
+        chai.assert.equal(document.getElementsByClassName('ds__wrapper--hidden').length, 1);
         document.getElementById('doria_settings').click();
-        assert.equal(document.getElementsByClassName('ds__wrapper--hidden').length, 0);
+        chai.assert.equal(document.getElementsByClassName('ds__wrapper--hidden').length, 0);
     });
 
-    // it('stores settings on acceptance with navigation', function () {
-    //     doria = prepare();
-    //     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
-    //     doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
-    //     doria.on('default', () => {});
-    //     doria.bake(true);
-    //     let settings = JSON.parse(global.localStorage.getItem('doria__settings'));
-    //     assert.equal(settings.isAccepted, false);
-    //     assert.equal(settings.firstLocation, global.window.location.pathname);
+    it('stores settings on acceptance with navigation', function () {
+        doria = prepare();
+        doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
+        doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
+        doria.on('default', () => {});
+        doria.bake(true);
+        let settings = JSON.parse(global.localStorage.getItem('doria__settings'));
+        chai.assert.equal(settings.isAccepted, false);
+        chai.assert.equal(doria.isAccepted, false);
+        chai.assert.equal(settings.firstLocation, global.window.location.pathname);
 
-    //     doria.reset();
-    //     doria = prepare();
-    //     doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
-    //     doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
-    //     doria.on('default', () => {});
-    //     doria.bake(true);
-    //     settings = JSON.parse(global.localStorage.getItem('doria__settings'));
-    //     assert.equal(settings.isAccepted, false);
-    //     assert.equal(settings.firstLocation, global.window.location.pathname);
+        sinon.stub(utils, 'default').returns('/newPath')
 
-    //     //simple.mock(window, 'location', {pathname : '/newpath'});
+        doria.reset();
+        doria = prepare();
+        doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
+        doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
+        doria.on('default', () => {});
+        doria.bake(true);
+        settings = JSON.parse(global.localStorage.getItem('doria__settings'));
+        chai.assert.equal(settings.isAccepted, true);
+        chai.assert.equal(settings.firstLocation, global.window.location.pathname);
 
-    //     //let originalWindow = window;
-    //     var localContext = {
-    //         location:{
-    //             pathname: "http://www.website.com?varName=foo"
-    //         }
-    //     };
-    //     window = { location : { pathname : 'example.com' } };
-    //     //console.log(window.location.pathname);
-    //     //window = originalWindow;
-    // });
+    });
 
 });
