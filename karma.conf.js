@@ -5,7 +5,7 @@ module.exports = function(config) {
     config.set({
         basePath: '.',
         frameworks: ['mocha',],
-        browsers: ['Chrome',],
+        browsers: ['Chrome', 'Firefox'],
 
         preprocessors: {
             // add webpack as preprocessor
