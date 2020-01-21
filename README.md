@@ -1,5 +1,5 @@
 # Doria
-[![Build Status](https://travis-ci.org/lotrekagency/doria.svg?branch=master)](https://travis-ci.org/lotrekagency/doria)
+[![Build Status](https://travis-ci.org/lotrekagency/doria.svg?branch=master)](https://travis-ci.org/lotrekagency/doria) [![codecov](https://codecov.io/gh/lotrekagency/doria/branch/master/graph/badge.svg)](https://codecov.io/gh/lotrekagency/doria)
 
 🍪 The cookie box loved by cookies' fanatics
 
