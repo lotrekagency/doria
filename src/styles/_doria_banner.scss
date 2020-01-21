@@ -2,7 +2,7 @@
   background-color: $backgroundBanner;
   color: $colorText;
   font-size: 1em;
-  padding: 1.5rem 0;
+  padding: 0.5rem 0;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -12,7 +12,7 @@
     padding: 0px 5%;
   }
   &__btns {
-    padding: 0.5rem 5%;
+    padding: 0px 5%;
     @media(min-width: 992px) {
       text-align: right;
     }
