@@ -211,7 +211,7 @@ describe('Doria Cookie box', function () {
     });
 
     it('stores settings on acceptance with navigation', function () {
-        doria = prepare();
+        doria = prepare({isAcceptedOnNavigation: true});
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
         doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
         doria.on('default', () => {});
@@ -224,7 +224,7 @@ describe('Doria Cookie box', function () {
         sinon.stub(utils, 'default').returns('/newPath')
 
         doria.reset();
-        doria = prepare();
+        doria = prepare({isAcceptedOnNavigation: true});
         doria.addCookieSettings('default', 'Default', 'Accept default cookies', [], true);
         doria.addCookieSettings('marketing', 'Marketing', 'Accept Marketing cookies', []);
         doria.on('default', () => {});

@@ -122,9 +122,9 @@ class CookieBox {
         this.cookies[key].accepted = preSelected;
     }
 
-    bake(isAcceptedOnNavigation=false) {
+    bake() {
         restoreConfig.bind(this)();
-        if (!this.isAccepted && isAcceptedOnNavigation && this.firstLocation) {
+        if (!this.isAccepted && this.options.isAcceptedOnNavigation && this.firstLocation) {
             if (this.firstLocation != getCurrentLocation()) {
                 this.isAccepted = true;
                 saveConfig.bind(this)();
@@ -176,7 +176,7 @@ class CookieBox {
             this.showSettings();
         }
 
-        if (!this.isAccepted && isAcceptedOnNavigation) {
+        if (!this.isAccepted && this.options.isAcceptedOnNavigation) {
             saveConfig.bind(this)();
         }
 
