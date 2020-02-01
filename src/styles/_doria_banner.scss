@@ -8,11 +8,12 @@
   bottom: 0;
   width: 100%;
   z-index: 110;
-  &__des {
-    padding: 0px 5%;
+  &__desc {
+    padding: 1rem 5%;
   }
   &__btns {
     padding: 0px 5%;
+    margin-bottom: 1rem;
     @media(min-width: 992px) {
       text-align: right;
     }
