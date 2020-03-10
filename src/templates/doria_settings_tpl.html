@@ -8,7 +8,7 @@
             <div class="cbx__wrapper">
               <label for="doria_<%=cookie%>" class="cbx__input">
                   <input class="cbx--custom" type="checkbox" id="doria_<%=cookie%>" name="<%=cookie%>" value="<%=cookie%>" <% if (doria.cookies[cookie].accepted) { %> checked  <% } %> <% if (doria.cookies[cookie].mandatory) { %> checked disabled <% } %>/>
-                  <span class="cbx__value"></span>
+                  <span class="cbx__value<% if (doria.cookies[cookie].mandatory) { %> cbx__value__disabled <% } %>"></span>
               </label>
             </div>
             <div class="cbx__content">
@@ -19,7 +19,13 @@
         <% } %>
         <div class="ds__beforeaccept"><%=doria.options.beforeAccept%></div>
 
-        <input class="ds__btn ds__submitbtn" type="submit" value="<%=doria.options.acceptButtonLabel%>">
+        <div class="ds__btnscontainer">
+          <input class="ds__btn ds__submitbtn" type="submit" value="<%=doria.options.saveAllButtonLabel || doria.options.acceptButtonLabel%>">
+          <div>
+            <input class="ds__btn ds__submitbtn" type="button" id="doria_btn_acceptall" value="<%=doria.options.acceptAllButtonLabel%>">
+            <input class="ds__btn ds__submitbtn" type="button" id="doria_btn_refuseall" value="<%=doria.options.refuseAllButtonLabel%>">
+          </div>
+        </div>
       </form>
     </div>
 </div>

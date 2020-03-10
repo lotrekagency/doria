@@ -49,6 +49,11 @@
         }
     }
 
+    &__btnscontainer {
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__btn {
         width: 100%;
         cursor: pointer;
@@ -119,6 +124,10 @@
         &:checked~.cbx__value {
             background-color: $validBackgroundColorCheckbox;
 
+            &__disabled {
+                background-color: grey;
+            }
+
             &:after {
                 left: calc(90% - 20px);
             }
@@ -138,6 +147,8 @@
         position: relative;
         background-color: $errorBackgroundColorCheckbox;
         transition: background-color 0.18s ease-in;
+
+
 
         &:after {
             content: " ";

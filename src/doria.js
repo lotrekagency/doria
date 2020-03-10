@@ -10,6 +10,15 @@ function deleteCookie(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+function checkUncheckCheckboxes(checkValue) {
+    let boxes = document.getElementsByClassName('cbx--custom');
+    for (let i = 0 ; i < boxes.length ; i++) {
+        if (!boxes[i].disabled) {
+            boxes[i].checked = checkValue;
+        }
+    }
+}
+
 function saveConfig() {
     let config = {
         isAccepted: this.isAccepted,
@@ -163,6 +172,18 @@ class CookieBox {
                 onAcceptCookies.bind(this)();
                 this.hideBanner();
                 return false;
+            };
+        }
+        let doriaAcceptAllBtn = document.getElementById('doria_btn_acceptall');
+        if (doriaAcceptAllBtn) {
+            doriaAcceptAllBtn.onclick = (event) => {
+                checkUncheckCheckboxes(true);
+            };
+        }
+        let doriaRefuseAllBtn = document.getElementById('doria_btn_refuseall');
+        if (doriaRefuseAllBtn) {
+            doriaRefuseAllBtn.onclick = (event) => {
+                checkUncheckCheckboxes(false);
             };
         }
         let doriaBannerCloseBtn = document.getElementById('doria_b_close');
