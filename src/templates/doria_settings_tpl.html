@@ -1,8 +1,7 @@
 <div class="ds__wrapper ds__wrapper--hidden">
   <div class="ds">
       <div class="ds__title">
-        <h2><%=doria.options.title%></h2>
-        <input class="ds__btn ds__submitbtn" type="button" id="doria_btn_closesettings" value="X">
+        <span><%=doria.options.title%></span>
       </div>
       <div class="ds__stitle"><%=doria.options.subtitle%></div>
       <form class="ds__form" id="doria_accept_form" method="POST">
@@ -23,7 +22,7 @@
         <div class="ds__beforeaccept"><%=doria.options.beforeAccept%></div>
 
         <div class="ds__btnscontainer">
-          <div>
+          <div style='display: flex;'>
             <input class="ds__btn ds__submitbtn" type="button" id="doria_btn_acceptall" value="<%=doria.options.acceptAllButtonLabel%>">
             <input class="ds__btn ds__submitbtn" type="button" id="doria_btn_refuseall" value="<%=doria.options.refuseAllButtonLabel%>">
           </div>

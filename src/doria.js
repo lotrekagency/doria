@@ -174,12 +174,6 @@ class CookieBox {
                 return false;
             };
         }
-        let doriaCloseSettingsBtn = document.getElementById('doria_btn_closesettings');
-        if (doriaCloseSettingsBtn) {
-            doriaCloseSettingsBtn.onclick = (event) => {
-                this.hideSettings();
-            };
-        }
         let doriaAcceptAllBtn = document.getElementById('doria_btn_acceptall');
         if (doriaAcceptAllBtn) {
             doriaAcceptAllBtn.onclick = (event) => {
