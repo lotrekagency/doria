@@ -1,6 +1,9 @@
 <div class="ds__wrapper ds__wrapper--hidden">
   <div class="ds">
-      <div class="ds__title"><%=doria.options.title%></div>
+      <div class="ds__title">
+        <h2><%=doria.options.title%></h2>
+        <input class="ds__btn ds__submitbtn" type="button" id="doria_btn_closesettings" value="X">
+      </div>
       <div class="ds__stitle"><%=doria.options.subtitle%></div>
       <form class="ds__form" id="doria_accept_form" method="POST">
         <% for (var cookie in doria.cookies) { %>
@@ -20,11 +23,11 @@
         <div class="ds__beforeaccept"><%=doria.options.beforeAccept%></div>
 
         <div class="ds__btnscontainer">
-          <input class="ds__btn ds__submitbtn" type="submit" value="<%=doria.options.saveAllButtonLabel || doria.options.acceptButtonLabel%>">
           <div>
             <input class="ds__btn ds__submitbtn" type="button" id="doria_btn_acceptall" value="<%=doria.options.acceptAllButtonLabel%>">
             <input class="ds__btn ds__submitbtn" type="button" id="doria_btn_refuseall" value="<%=doria.options.refuseAllButtonLabel%>">
           </div>
+          <input class="ds__btn ds__submitbtn" type="submit" value="<%=doria.options.saveAllButtonLabel || doria.options.acceptButtonLabel%>">
         </div>
       </form>
     </div>
